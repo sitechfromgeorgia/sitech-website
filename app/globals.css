@@ -1,26 +1,57 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-background: light-dark(0 0% 100%, 240 10% 3.9%);
+  --color-foreground: light-dark(240 10% 3.9%, 0 0% 98%);
+  
+  --color-primary: light-dark(262 83% 58%, 263 70% 63%);
+  --color-primary-foreground: 0 0% 100%;
+  
+  --color-secondary: light-dark(240 4.8% 95.9%, 240 3.7% 15.9%);
+  --color-secondary-foreground: light-dark(240 5.9% 10%, 0 0% 98%);
+  
+  --color-accent: light-dark(240 4.8% 95.9%, 240 3.7% 15.9%);
+  --color-accent-foreground: light-dark(240 5.9% 10%, 0 0% 98%);
+  
+  --color-muted: light-dark(240 4.8% 95.9%, 240 3.7% 15.9%);
+  --color-muted-foreground: light-dark(240 3.8% 46.1%, 240 5% 64.9%);
+  
+  --color-border: light-dark(240 5.9% 90%, 240 3.7% 15.9%);
+  
+  --radius: 0.75rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  @apply border-gray-200 dark:border-gray-800;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-white dark:bg-gray-950 text-gray-950 dark:text-gray-50;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-white dark:bg-gray-950;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-700 rounded-lg;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-600;
+}
+
+/* Smooth transitions */
+html {
+  scroll-behavior: smooth;
 }
