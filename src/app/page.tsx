@@ -146,65 +146,71 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Project 1 - Caucasus Dance Bridge */}
-            <a href="https://caucasusdancebridge.com" target="_blank" rel="noopener noreferrer" 
-               className="group block rounded-2xl overflow-hidden bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-xl transition-all duration-300">
+            {/* Project 1 - Greenland77 - COMPLETED! */}
+            <a href="https://greenland77.ge" target="_blank" rel="noopener noreferrer" 
+               className="group block rounded-2xl overflow-hidden bg-[var(--color-card)] border-2 border-[var(--color-primary)] hover:shadow-xl transition-all duration-300 relative">
+              <div className="absolute top-4 right-4 z-10 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                ✅ ჩაბარებული
+              </div>
+              <div className="aspect-video bg-gradient-to-br from-green-600 to-emerald-700 flex items-center justify-center text-6xl">
+                🏡
+              </div>
+              <div className="p-6">
+                <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--color-primary)] transition-colors">
+                  Greenland77.ge
+                </h3>
+                <p className="text-[var(--color-muted)] text-sm mb-3">
+                  უძრავი ქონების სააგენტოს ვებსაიტი
+                </p>
+                <div className="flex gap-2">
+                  <span className="px-2 py-1 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded text-xs">კორპორატიული</span>
+                  <span className="px-2 py-1 bg-green-500/10 text-green-500 rounded text-xs">უძრავი ქონება</span>
+                </div>
+              </div>
+            </a>
+
+            {/* Project 2 - Caucasus Dance Bridge - In Progress */}
+            <div className="group block rounded-2xl overflow-hidden bg-[var(--color-card)] border border-[var(--color-border)] relative opacity-90">
+              <div className="absolute top-4 right-4 z-10 bg-[var(--color-secondary)] text-white text-xs font-bold px-3 py-1 rounded-full">
+                🚧 მუშავდება
+              </div>
               <div className="aspect-video bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-6xl">
                 💃
               </div>
               <div className="p-6">
-                <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--color-primary)] transition-colors">
+                <h3 className="text-lg font-bold mb-2">
                   Caucasus Dance Bridge
                 </h3>
                 <p className="text-[var(--color-muted)] text-sm mb-3">
-                  საერთაშორისო ცეკვის ფესტივალის ვებსაიტი
+                  საერთაშორისო ცეკვის ფესტივალი
                 </p>
                 <div className="flex gap-2">
                   <span className="px-2 py-1 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded text-xs">Next.js</span>
                   <span className="px-2 py-1 bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded text-xs">Booking</span>
                 </div>
               </div>
-            </a>
+            </div>
 
-            {/* Project 2 - Tbilisi.today */}
-            <a href="https://tbilisi.today" target="_blank" rel="noopener noreferrer"
-               className="group block rounded-2xl overflow-hidden bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-xl transition-all duration-300">
-              <div className="aspect-video bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-6xl">
-                📰
+            {/* Project 3 - Coming Soon */}
+            <div className="group block rounded-2xl overflow-hidden bg-[var(--color-card)] border border-dashed border-[var(--color-border)] relative">
+              <div className="absolute top-4 right-4 z-10 bg-[var(--color-muted)] text-white text-xs font-bold px-3 py-1 rounded-full">
+                🔜 მალე
+              </div>
+              <div className="aspect-video bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center text-6xl">
+                ➕
               </div>
               <div className="p-6">
-                <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--color-primary)] transition-colors">
-                  Tbilisi.today
+                <h3 className="text-lg font-bold mb-2 text-[var(--color-muted)]">
+                  თქვენი პროექტი?
                 </h3>
                 <p className="text-[var(--color-muted)] text-sm mb-3">
-                  ახალი ამბების აგრეგატორი AI-ით
+                  შეკვეთეთ თქვენი უნიკალური ვებსაიტი
                 </p>
-                <div className="flex gap-2">
-                  <span className="px-2 py-1 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded text-xs">AI/ML</span>
-                  <span className="px-2 py-1 bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] rounded text-xs">News</span>
-                </div>
+                <a href="#contact" className="inline-block px-4 py-2 bg-[var(--color-primary)] text-white rounded-lg text-sm font-medium hover:bg-[var(--color-primary-dark)] transition-colors">
+                  დაიწყე პროექტი →
+                </a>
               </div>
-            </a>
-
-            {/* Project 3 - Mobiline.cloud */}
-            <a href="https://mobiline.cloud" target="_blank" rel="noopener noreferrer"
-               className="group block rounded-2xl overflow-hidden bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-xl transition-all duration-300">
-              <div className="aspect-video bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-6xl">
-                📱
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold mb-2 group-hover:text-[var(--color-primary)] transition-colors">
-                  Mobiline.cloud
-                </h3>
-                <p className="text-[var(--color-muted)] text-sm mb-3">
-                  მობილურების მაღაზიის მართვის სისტემა
-                </p>
-                <div className="flex gap-2">
-                  <span className="px-2 py-1 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded text-xs">SaaS</span>
-                  <span className="px-2 py-1 bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded text-xs">Inventory</span>
-                </div>
-              </div>
-            </a>
+            </div>
           </div>
         </div>
       </section>
