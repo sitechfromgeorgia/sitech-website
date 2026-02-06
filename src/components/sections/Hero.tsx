@@ -3,35 +3,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Zap, Globe } from "lucide-react";
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const floatingAnimation = {
-  y: [0, -10, 0],
-  transition: {
-    duration: 3,
-    repeat: Infinity,
-    ease: "easeInOut" as const,
-  },
-};
-
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-pattern">
@@ -63,19 +34,22 @@ export default function Hero() {
       {/* Floating Icons */}
       <motion.div 
         className="absolute top-32 right-[20%] text-[var(--color-primary)]"
-        animate={floatingAnimation}
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       >
         <Sparkles size={32} />
       </motion.div>
       <motion.div 
         className="absolute bottom-32 left-[15%] text-[var(--color-accent)]"
-        animate={{ ...floatingAnimation, transition: { ...floatingAnimation.transition, delay: 1 } }}
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       >
         <Zap size={28} />
       </motion.div>
       <motion.div 
         className="absolute top-1/2 right-[10%] text-[var(--color-secondary)]"
-        animate={{ ...floatingAnimation, transition: { ...floatingAnimation.transition, delay: 2 } }}
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       >
         <Globe size={36} />
       </motion.div>
@@ -83,13 +57,17 @@ export default function Hero() {
       {/* Main Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
         <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
           className="space-y-8"
         >
           {/* Badge */}
-          <motion.div variants={fadeInUp}>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-sm font-medium border border-[var(--color-primary)]/20">
               <Sparkles size={16} />
               AI-Enhanced Development
@@ -98,7 +76,9 @@ export default function Hero() {
 
           {/* Main Headline */}
           <motion.h1 
-            variants={fadeInUp}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.35 }}
             className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight"
           >
             <span className="block text-[var(--color-foreground)]">
@@ -111,7 +91,9 @@ export default function Hero() {
 
           {/* Subheadline */}
           <motion.p 
-            variants={fadeInUp}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
             className="max-w-2xl mx-auto text-xl md:text-2xl text-[var(--color-muted)] leading-relaxed"
           >
             თანამედროვე ვებსაიტები და ციფრული გადაწყვეტილებები 
@@ -121,7 +103,9 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <motion.div 
-            variants={fadeInUp}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.65 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4"
           >
             <motion.button
@@ -144,7 +128,9 @@ export default function Hero() {
 
           {/* Trust Indicators */}
           <motion.div 
-            variants={fadeInUp}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
             className="pt-12 flex flex-wrap justify-center items-center gap-8 text-[var(--color-muted)]"
           >
             <div className="flex items-center gap-2">
