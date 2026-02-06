@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import Navigation from "@/components/Navigation";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
@@ -13,12 +14,12 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "SiTech Georgia | AI-Enhanced Web Development",
-  description: "Modern web development agency in Georgia. We build stunning websites, e-commerce platforms, and AI-powered solutions for businesses.",
-  keywords: ["საიტის დამზადება", "ვებ დეველოპმენტი", "web development georgia", "AI web agency"],
+  title: "SiTech Georgia | AI-გაძლიერებული ვებ დეველოპმენტი",
+  description: "ქართული სული, AI-გაძლიერებული მომავალი. თანამედროვე ვებ დეველოპმენტი ქართული ბიზნესებისთვის. საიტის დამზადება, ონლაინ მაღაზია, Telegram ბოტები.",
+  keywords: ["საიტის დამზადება", "ვებ დეველოპმენტი", "ონლაინ მაღაზიის შექმნა", "telegram ბოტი", "AI ინტეგრაცია", "ბათუმი", "web development georgia"],
   openGraph: {
-    title: "SiTech Georgia | AI-Enhanced Web Development",
-    description: "Georgian Soul, AI-Augmented Future. Modern websites & digital solutions.",
+    title: "SiTech Georgia | AI-გაძლიერებული ვებ დეველოპმენტი",
+    description: "ქართული სული, AI-გაძლიერებული მომავალი",
     locale: "ka_GE",
     type: "website",
   },
@@ -32,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="ka" className={`${inter.variable} ${playfair.variable}`}>
       <body className="antialiased">
+        <Navigation />
         {children}
       </body>
     </html>

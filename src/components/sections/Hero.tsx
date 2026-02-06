@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles, Zap, Globe } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-pattern">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-pattern pt-20">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
