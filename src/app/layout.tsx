@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
+import ChatWidget from "@/components/ChatWidget";
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body className="antialiased">
         <Navigation />
         {children}
+        <ChatWidget />
       </body>
     </html>
   );
