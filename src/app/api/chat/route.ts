@@ -36,12 +36,22 @@ export async function POST(request: NextRequest) {
     const userAgent = request.headers.get("user-agent") || "unknown";
     const timestamp = new Date().toLocaleString("ka-GE", { timeZone: "Asia/Tbilisi" });
 
-    // Format message for Telegram
-    let telegramMessage: string;
-    
-    if (isLead && leadInfo) {
-      // New lead notification
-      telegramMessage = `
+    // Check if this is an escalation request (human contact needed)
+    const lowerMessage = message.toLowerCase();
+    const escalationKeywords = ["ადამიანთან", "მენეჯერთან", "დარეკვა", "პრობლემა", "რეკლამაცია", "დამირეკეთ", "მინდა დარეკვა"];
+    const needsEscalation = escalationKeywords.some(kw => lowerMessage.includes(kw));
+
+    // Only send Telegram notification for:
+    // 1. New leads (form submission with contact info)
+    // 2. Escalation requests (human contact needed)
+    const shouldNotify = (isLead && leadInfo) || needsEscalation;
+
+    if (shouldNotify && TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
+      let telegramMessage: string;
+      
+      if (isLead && leadInfo) {
+        // New lead notification
+        telegramMessage = `
 🎉 *ახალი ლიდი საიტიდან!*
 ━━━━━━━━━━━━━━━━━━
 👤 *სახელი:* ${leadInfo.name}
@@ -51,41 +61,45 @@ export async function POST(request: NextRequest) {
 ⏰ *დრო:* ${timestamp}
 ━━━━━━━━━━━━━━━━━━
 _sitech.ge — ახალი ლიდი!_
-      `.trim();
-    } else {
-      // Regular chat message
-      const leadContext = leadInfo 
-        ? `\n👤 *ვინ:* ${leadInfo.name} (${leadInfo.phone})`
-        : "";
-      
-      telegramMessage = `
-🌐 *შეტყობინება საიტიდან*
+        `.trim();
+      } else if (needsEscalation) {
+        // Escalation request - human contact needed
+        const leadContext = leadInfo 
+          ? `\n👤 *ვინ:* ${leadInfo.name} (${leadInfo.phone})`
+          : "";
+        
+        telegramMessage = `
+🚨 *ადამიანთან საუბარი სურს!*
 ━━━━━━━━━━━━━━━━━━${leadContext}
 📝 *შეტყობინება:*
 ${message}
 
 ⏰ ${timestamp}
 ━━━━━━━━━━━━━━━━━━
-_sitech.ge chat_
-      `.trim();
-    }
+_sitech.ge — საჭიროებს ყურადღებას!_
+        `.trim();
+      } else {
+        telegramMessage = ""; // Won't reach here due to shouldNotify check
+      }
 
-    // Send to Telegram if configured
-    if (TELEGRAM_BOT_TOKEN && TELEGRAM_CHAT_ID) {
-      try {
-        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: telegramMessage,
-            parse_mode: "Markdown",
-          }),
-        });
-      } catch (telegramError) {
-        console.error("Telegram send failed:", telegramError);
+      if (telegramMessage) {
+        try {
+          await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              text: telegramMessage,
+              parse_mode: "Markdown",
+            }),
+          });
+        } catch (telegramError) {
+          console.error("Telegram send failed:", telegramError);
+        }
       }
     }
+    
+    // Regular chat messages are handled by the bot without notification
 
     // Generate AI response
     const response = generateResponse(message, leadInfo, action);
