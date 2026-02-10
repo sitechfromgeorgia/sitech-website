@@ -25,9 +25,10 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SiTech Georgia | AI-გაძლიერებული ვებ დეველოპმენტი",
-  description: "ქართული სული, AI-გაძლიერებული მომავალი. თანამედროვე ვებ დეველოპმენტი ქართული ბიზნესებისთვის.",
-  keywords: ["ვებ განვითარება", "AI ინტეგრაცია", "PWA", "SEO", "ციფრული მარკეტინგი", "საქართველო"],
+  title: "Lucy | SiTech Georgia — AI სააგენტო",
+  description: "ლუსი — საქართველოს პირველი AI სააგენტოს სახე. ვებ დეველოპმენტი, ავტომატიზაცია, ციფრული გადაწყვეტილებები ბათუმიდან.",
+  keywords: ["ვებ განვითარება", "AI ინტეგრაცია", "PWA", "SEO", "ციფრული მარკეტინგი", "საქართველო", "ბათუმი"],
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
