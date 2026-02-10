@@ -193,70 +193,83 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Service 1 */}
-            <div className="group p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-xl transition-all">
-              <div className="mb-4">
-                <Image src="/icons/icon-landing.jpg" alt="ლენდინგი" width={64} height={64} className="rounded-lg" />
+            <div className="group relative p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] transition-all overflow-hidden">
+              <div className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity" style={{backgroundImage: "radial-gradient(circle at 20% 50%, var(--color-primary) 1px, transparent 1px), radial-gradient(circle at 80% 20%, var(--color-accent) 1px, transparent 1px)", backgroundSize: "30px 30px, 40px 40px"}} />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--color-primary)]/10 to-transparent rounded-bl-full" />
+              <div className="relative z-10">
+                <div className="mb-4"><Image src="/icons/icon-landing.jpg" alt="ლენდინგი" width={64} height={64} className="rounded-lg" /></div>
+                <h3 className="text-xl font-bold mb-2">ლენდინგი (1 ენა)</h3>
+                <p className="text-[var(--color-muted)] text-sm mb-4">ერთგვერდიანი საიტი ერთ ენაზე</p>
+                <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">100₾</div>
               </div>
-              <h3 className="text-xl font-bold mb-2">ლენდინგი (1 ენა)</h3>
-              <p className="text-[var(--color-muted)] text-sm mb-4">ერთგვერდიანი საიტი ერთ ენაზე</p>
-              <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">100₾</div>
             </div>
 
             {/* Service 2 */}
-            <div className="group p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:shadow-xl transition-all">
-              <div className="text-4xl mb-4">🌍</div>
-              <h3 className="text-xl font-bold mb-2">+ენის დამატება</h3>
-              <p className="text-[var(--color-muted)] text-sm mb-4">დამატებითი ენის ვერსია</p>
-              <div className="text-3xl font-bold text-[var(--color-accent)] mb-2">+50₾/ენა</div>
+            <div className="group relative p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:shadow-[0_0_30px_rgba(245,158,11,0.15)] transition-all overflow-hidden">
+              <div className="absolute inset-0 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity" style={{backgroundImage: "linear-gradient(135deg, var(--color-accent) 25%, transparent 25%), linear-gradient(225deg, var(--color-accent) 25%, transparent 25%)", backgroundSize: "20px 20px"}} />
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-[var(--color-accent)]/10 to-transparent rounded-tr-full" />
+              <div className="relative z-10">
+                <div className="text-4xl mb-4">🌍</div>
+                <h3 className="text-xl font-bold mb-2">+ენის დამატება</h3>
+                <p className="text-[var(--color-muted)] text-sm mb-4">დამატებითი ენის ვერსია</p>
+                <div className="text-3xl font-bold text-[var(--color-accent)] mb-2">+50₾/ენა</div>
+              </div>
             </div>
 
             {/* Service 3 */}
-            <div className="group p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-secondary)] hover:shadow-xl transition-all">
-              <div className="mb-4">
-                <Image src="/icons/icon-business-site.jpg" alt="ბიზნეს საიტი" width={64} height={64} className="rounded-lg" />
+            <div className="group relative p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-secondary)] hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all overflow-hidden">
+              <div className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity" style={{backgroundImage: "repeating-linear-gradient(0deg, var(--color-secondary), var(--color-secondary) 1px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, var(--color-secondary), var(--color-secondary) 1px, transparent 1px, transparent 40px)"}} />
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--color-secondary)]/20 to-transparent" />
+              <div className="relative z-10">
+                <div className="mb-4"><Image src="/icons/icon-business-site.jpg" alt="ბიზნეს საიტი" width={64} height={64} className="rounded-lg" /></div>
+                <h3 className="text-xl font-bold mb-2">ბიზნეს საიტი</h3>
+                <p className="text-[var(--color-muted)] text-sm mb-4">3-5 გვერდიანი საიტი</p>
+                <div className="text-3xl font-bold text-[var(--color-secondary)] mb-2">500-1,500₾</div>
               </div>
-              <h3 className="text-xl font-bold mb-2">ბიზნეს საიტი</h3>
-              <p className="text-[var(--color-muted)] text-sm mb-4">3-5 გვერდიანი საიტი</p>
-              <div className="text-3xl font-bold text-[var(--color-secondary)] mb-2">500-1,500₾</div>
             </div>
 
             {/* Service 4 */}
-            <div className="group p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-xl transition-all">
-              <div className="mb-4">
-                <Image src="/icons/icon-complex-app.jpg" alt="კომპლექსური საიტი/აპი" width={64} height={64} className="rounded-lg" />
+            <div className="group relative p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] transition-all overflow-hidden">
+              <div className="absolute inset-0 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity" style={{backgroundImage: "conic-gradient(from 0deg at 50% 50%, var(--color-primary) 0deg, transparent 60deg, transparent 300deg, var(--color-primary) 360deg)", backgroundSize: "60px 60px"}} />
+              <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tl from-[var(--color-primary)]/5 to-transparent" />
+              <div className="relative z-10">
+                <div className="mb-4"><Image src="/icons/icon-complex-app.jpg" alt="კომპლექსური საიტი/აპი" width={64} height={64} className="rounded-lg" /></div>
+                <h3 className="text-xl font-bold mb-2">კომპლექსური საიტი/აპი</h3>
+                <p className="text-[var(--color-muted)] text-sm mb-4">სრული ფუნქციონალი</p>
+                <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">1,500-5,000₾</div>
               </div>
-              <h3 className="text-xl font-bold mb-2">კომპლექსური საიტი/აპი</h3>
-              <p className="text-[var(--color-muted)] text-sm mb-4">სრული ფუნქციონალი</p>
-              <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">1,500-5,000₾</div>
             </div>
 
             {/* Service 5 */}
-            <div className="group p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:shadow-xl transition-all">
-              <div className="mb-4">
-                <Image src="/icons/icon-payment.jpg" alt="გადახდის ინტეგრაცია" width={64} height={64} className="rounded-lg" />
+            <div className="group relative p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:shadow-[0_0_30px_rgba(245,158,11,0.15)] transition-all overflow-hidden">
+              <div className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity" style={{backgroundImage: "radial-gradient(ellipse at 30% 70%, var(--color-accent) 0%, transparent 50%), radial-gradient(ellipse at 70% 30%, var(--color-primary) 0%, transparent 50%)"}} />
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[var(--color-accent)]/30 via-transparent to-[var(--color-primary)]/30" />
+              <div className="relative z-10">
+                <div className="mb-4"><Image src="/icons/icon-payment.jpg" alt="გადახდის ინტეგრაცია" width={64} height={64} className="rounded-lg" /></div>
+                <h3 className="text-xl font-bold mb-2">გადახდის ინტეგრაცია</h3>
+                <p className="text-[var(--color-muted)] text-sm mb-4">TBC, BOG და სხვა</p>
+                <div className="text-3xl font-bold text-[var(--color-accent)] mb-2">5,000₾+</div>
               </div>
-              <h3 className="text-xl font-bold mb-2">გადახდის ინტეგრაცია</h3>
-              <p className="text-[var(--color-muted)] text-sm mb-4">TBC, BOG და სხვა</p>
-              <div className="text-3xl font-bold text-[var(--color-accent)] mb-2">5,000₾+</div>
             </div>
 
             {/* Service 6 */}
-            <div className="group p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-secondary)] hover:shadow-xl transition-all">
-              <div className="mb-4">
-                <Image src="/icons/icon-maintenance.jpg" alt="Maintenance" width={64} height={64} className="rounded-lg" />
+            <div className="group relative p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-secondary)] hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all overflow-hidden">
+              <div className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity" style={{backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 10px, var(--color-secondary) 10px, var(--color-secondary) 11px)"}} />
+              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--color-secondary)]/20 to-transparent" />
+              <div className="relative z-10">
+                <div className="mb-4"><Image src="/icons/icon-maintenance.jpg" alt="Maintenance" width={64} height={64} className="rounded-lg" /></div>
+                <h3 className="text-xl font-bold mb-2">Maintenance (პატარა)</h3>
+                <p className="text-[var(--color-muted)] text-sm mb-4">მცირე საიტების მხარდაჭერა</p>
+                <div className="text-3xl font-bold text-[var(--color-secondary)] mb-2">100₾/თვე</div>
               </div>
-              <h3 className="text-xl font-bold mb-2">Maintenance (პატარა)</h3>
-              <p className="text-[var(--color-muted)] text-sm mb-4">მცირე საიტების მხარდაჭერა</p>
-              <div className="text-3xl font-bold text-[var(--color-secondary)] mb-2">100₾/თვე</div>
             </div>
 
             {/* Service 7 */}
-            <div className="group p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-xl transition-all md:col-span-2 lg:col-span-3">
-              <div className="flex items-center justify-between flex-wrap gap-4">
+            <div className="group relative p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] transition-all md:col-span-2 lg:col-span-3 overflow-hidden">
+              <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity" style={{backgroundImage: "radial-gradient(circle at 10% 50%, var(--color-primary) 1px, transparent 1px), radial-gradient(circle at 90% 50%, var(--color-accent) 1px, transparent 1px)", backgroundSize: "50px 50px, 35px 35px"}} />
+              <div className="relative z-10 flex items-center justify-between flex-wrap gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0">
-                    <Image src="/icons/icon-maintenance.jpg" alt="Maintenance" width={64} height={64} className="rounded-lg" />
-                  </div>
+                  <div className="flex-shrink-0"><Image src="/icons/icon-maintenance.jpg" alt="Maintenance" width={64} height={64} className="rounded-lg" /></div>
                   <div>
                     <h3 className="text-xl font-bold mb-1">Maintenance (დიდი)</h3>
                     <p className="text-[var(--color-muted)] text-sm">დიდი პროექტების მხარდაჭერა</p>
@@ -318,14 +331,14 @@ export default function Home() {
               { icon: "icon-smm.jpg", title: "სოციალური ქსელების მართვა", desc: "SMM და კონტენტ მენეჯმენტი" },
               { icon: "icon-training.jpg", title: "ტრენინგები/კურსები", desc: "ვებ ტექნოლოგიების სწავლება" },
             ].map((service) => (
-              <div key={service.title} className="p-6 rounded-2xl bg-[var(--color-background)] border border-dashed border-[var(--color-border)] opacity-75 hover:opacity-100 transition-opacity">
-                <div className="mb-4">
-                  <Image src={`/icons/${service.icon}`} alt={service.title} width={64} height={64} className="rounded-lg" />
-                </div>
-                <h3 className="text-lg font-bold mb-2">{service.title}</h3>
-                <p className="text-[var(--color-muted)] text-sm">{service.desc}</p>
-                <div className="mt-4 inline-block px-3 py-1 bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] rounded-full text-xs font-medium">
-                  🔜 მალე
+              <div key={service.title} className="group relative p-6 rounded-2xl bg-[var(--color-background)] border border-dashed border-[var(--color-border)] opacity-75 hover:opacity-100 transition-all overflow-hidden">
+                <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity" style={{backgroundImage: "radial-gradient(circle, var(--color-secondary) 1px, transparent 1px)", backgroundSize: "24px 24px"}} />
+                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[var(--color-secondary)]/5 to-transparent rounded-bl-full" />
+                <div className="relative z-10">
+                  <div className="mb-4"><Image src={`/icons/${service.icon}`} alt={service.title} width={64} height={64} className="rounded-lg" /></div>
+                  <h3 className="text-lg font-bold mb-2">{service.title}</h3>
+                  <p className="text-[var(--color-muted)] text-sm">{service.desc}</p>
+                  <div className="mt-4 inline-block px-3 py-1 bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] rounded-full text-xs font-medium">🔜 მალე</div>
                 </div>
               </div>
             ))}
