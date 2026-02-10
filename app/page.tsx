@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Sparkles, Zap, Globe, ArrowRight, MessageCircle, Bot, Clock, Languages, Heart, ExternalLink } from "lucide-react";
 
 export default function Home() {
@@ -11,12 +12,16 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-pattern pt-20">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        {/* Hero background image */}
+        <div className="absolute inset-0">
+          <Image src="/hero-bg.png" alt="" fill className="object-cover opacity-30" priority />
+          <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-background)]/60 via-transparent to-[var(--color-background)]" />
+        </div>
         {/* Background blobs */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-[var(--color-primary)]/10 rounded-full blur-3xl animate-blob" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[var(--color-accent)]/10 rounded-full blur-3xl animate-blob animation-delay-2000" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--color-secondary)]/5 rounded-full blur-3xl animate-blob animation-delay-4000" />
         </div>
 
         {/* Floating icons */}
@@ -106,7 +111,7 @@ export default function Home() {
                     <p className="text-sm">როგორ შემიძლია დაგეხმარო?</p>
                   </div>
                   
-                  <div className="text-9xl mb-4 animate-float">🤖</div>
+                  <Image src="/lucy-avatar.png" alt="Lucy - SiTech AI Assistant" width={200} height={200} className="mb-4 animate-float rounded-full" />
                   <div className="text-center">
                     <h3 className="text-3xl font-bold mb-2">ლუსი</h3>
                     <p className="text-[var(--color-muted)]">SiTech AI Assistant</p>
