@@ -14,10 +14,10 @@ export default function Navbar() {
             Si<span className="text-[var(--color-accent)]">Tech</span>
           </a>
           <div className="hidden md:flex items-center gap-8">
-            <a href="#services" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">სერვისები</a>
-            <a href="#portfolio" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">პორტფოლიო</a>
-            <a href="#contact" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">კონტაქტი</a>
-            <a href="https://t.me/SiTechagencybot" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white rounded-full font-medium transition-colors">
+            <a href="#services" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors text-sm uppercase tracking-widest font-semibold">სერვისები</a>
+            <a href="#portfolio" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors text-sm uppercase tracking-widest font-semibold">პორტფოლიო</a>
+            <a href="#contact" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors text-sm uppercase tracking-widest font-semibold">კონტაქტი</a>
+            <a href="https://t.me/SiTechagencybot" target="_blank" rel="noopener noreferrer" className="px-6 py-2.5 bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white rounded-full text-sm font-semibold transition-all hover:shadow-lg hover:shadow-[var(--color-primary)]/25 tracking-wider">
               💬 მომწერე
             </a>
           </div>
@@ -37,10 +37,10 @@ export default function Navbar() {
         </div>
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-[var(--color-border)] pt-4 space-y-4">
-            <a href="#services" onClick={() => setIsMenuOpen(false)} className="block text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">სერვისები</a>
-            <a href="#portfolio" onClick={() => setIsMenuOpen(false)} className="block text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">პორტფოლიო</a>
-            <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">კონტაქტი</a>
-            <a href="https://t.me/SiTechagencybot" target="_blank" rel="noopener noreferrer" className="block px-6 py-2 bg-[var(--color-primary)] text-white rounded-full font-medium text-center">
+            <a href="#services" onClick={() => setIsMenuOpen(false)} className="block text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors text-sm uppercase tracking-widest font-semibold">სერვისები</a>
+            <a href="#portfolio" onClick={() => setIsMenuOpen(false)} className="block text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors text-sm uppercase tracking-widest font-semibold">პორტფოლიო</a>
+            <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors text-sm uppercase tracking-widest font-semibold">კონტაქტი</a>
+            <a href="https://t.me/SiTechagencybot" target="_blank" rel="noopener noreferrer" className="block px-6 py-2.5 bg-[var(--color-primary)] text-white rounded-full text-sm font-semibold text-center tracking-wider">
               💬 მომწერე
             </a>
           </div>
