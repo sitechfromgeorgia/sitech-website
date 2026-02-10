@@ -29,6 +29,19 @@ export const metadata: Metadata = {
   description: "ლუსი — საქართველოს პირველი AI სააგენტოს სახე. ვებ დეველოპმენტი, ავტომატიზაცია, ციფრული გადაწყვეტილებები ბათუმიდან.",
   keywords: ["ვებ განვითარება", "AI ინტეგრაცია", "PWA", "SEO", "ციფრული მარკეტინგი", "საქართველო", "ბათუმი"],
   manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Lucy",
+  },
+  icons: {
+    icon: "/icon-192.png",
+    apple: "/apple-touch-icon.png",
+  },
+  other: {
+    "theme-color": "#8b5cf6",
+    "mobile-web-app-capable": "yes",
+  },
 };
 
 export default function RootLayout({
