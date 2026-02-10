@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { Navbar } from "@/components/navbar";
+import Navbar from "@/components/navbar";
 import { Footer } from "@/components/footer";
 
 const geistSans = Geist({
@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SiTech - ციფრული სააგენტო | თანამედროვე ვებ გადაწყვეტილებები",
-  description: "პროფესიონალური ვებ განვითარება, AI ინტეგრაცია, PWA აპლიკაციები და SEO სერვისები საქართველოში",
+  title: "SiTech Georgia | AI-გაძლიერებული ვებ დეველოპმენტი",
+  description: "ქართული სული, AI-გაძლიერებული მომავალი. თანამედროვე ვებ დეველოპმენტი ქართული ბიზნესებისთვის.",
   keywords: ["ვებ განვითარება", "AI ინტეგრაცია", "PWA", "SEO", "ციფრული მარკეტინგი", "საქართველო"],
 };
 
