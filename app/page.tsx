@@ -200,19 +200,19 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Service 1 */}
+            {/* Service 1 - ლენდინგი */}
             <div className="group relative p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] transition-all overflow-hidden">
               <div className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity" style={{backgroundImage: "radial-gradient(circle at 20% 50%, var(--color-primary) 1px, transparent 1px), radial-gradient(circle at 80% 20%, var(--color-accent) 1px, transparent 1px)", backgroundSize: "30px 30px, 40px 40px"}} />
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--color-primary)]/10 to-transparent rounded-bl-full" />
               <div className="relative z-10">
                 <div className="mb-4"><Image src="/icons/icon-landing.jpg" alt="ლენდინგი" width={64} height={64} className="rounded-lg" /></div>
-                <h3 className="text-xl font-bold mb-2">ლენდინგი (1 ენა)</h3>
-                <p className="text-[var(--color-muted)] text-sm mb-4">ერთგვერდიანი საიტი ერთ ენაზე</p>
-                <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">100₾</div>
+                <h3 className="text-xl font-bold mb-2">ლენდინგი</h3>
+                <p className="text-[var(--color-muted)] text-sm mb-4">ერთგვერდიანი საიტი თქვენი ბიზნესისთვის</p>
+                <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">200₾-დან</div>
               </div>
             </div>
 
-            {/* Service 2 */}
+            {/* Service 2 - მრავალენოვანი */}
             <div className="group relative p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:shadow-[0_0_30px_rgba(245,158,11,0.15)] transition-all overflow-hidden">
               <div className="absolute inset-0 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity" style={{backgroundImage: "linear-gradient(135deg, var(--color-accent) 25%, transparent 25%), linear-gradient(225deg, var(--color-accent) 25%, transparent 25%)", backgroundSize: "20px 20px"}} />
               <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-[var(--color-accent)]/10 to-transparent rounded-tr-full" />
@@ -537,6 +537,32 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Lucy Chat Widget - Fixed Bottom Right */}
+      <a
+        href="https://t.me/SiTechagencybot"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 group"
+      >
+        <div className="relative">
+          {/* Pulse ring */}
+          <div className="absolute inset-0 bg-[var(--color-primary)] rounded-full animate-ping opacity-20" />
+          {/* Main button */}
+          <div className="relative w-16 h-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center shadow-2xl shadow-[var(--color-primary)]/30 group-hover:scale-110 group-hover:shadow-[var(--color-primary)]/50 transition-all duration-300">
+            <Image src="/lucy-avatar.png" alt="Lucy" width={40} height={40} className="rounded-full" />
+          </div>
+          {/* Online badge */}
+          <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-[var(--color-background)] flex items-center justify-center">
+            <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+          </div>
+          {/* Tooltip */}
+          <div className="absolute bottom-full right-0 mb-3 px-4 py-2 bg-[var(--color-card)] border border-[var(--color-border)] rounded-xl text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-xl">
+            💬 მომწერე ლუსის!
+            <div className="absolute top-full right-6 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-[var(--color-card)]" />
+          </div>
+        </div>
+      </a>
     </main>
   );
 }
