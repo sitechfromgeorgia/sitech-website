@@ -112,3 +112,280 @@ html {
 ::-webkit-scrollbar-track { background: var(--color-background); }
 ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 8px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-muted); }
+
+/* Dynamic Background Animations */
+
+/* Lucy Section - Floating Orbs/Particles */
+@keyframes floatOrb1 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(30px, -40px); }
+  50% { transform: translate(-20px, -60px); }
+  75% { transform: translate(40px, -30px); }
+}
+
+@keyframes floatOrb2 {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-40px, 30px); }
+  50% { transform: translate(30px, 50px); }
+  75% { transform: translate(-30px, 20px); }
+}
+
+@keyframes floatOrb3 {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(20px, -30px); }
+  66% { transform: translate(-30px, 40px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+.lucy-bg-orbs::before,
+.lucy-bg-orbs::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+}
+
+.lucy-bg-orbs::before {
+  width: 200px;
+  height: 200px;
+  background: var(--color-primary);
+  top: 10%;
+  left: 15%;
+  opacity: 0.15;
+  animation: floatOrb1 8s ease-in-out infinite;
+}
+
+.lucy-bg-orbs::after {
+  width: 150px;
+  height: 150px;
+  background: var(--color-accent);
+  bottom: 20%;
+  right: 20%;
+  opacity: 0.15;
+  animation: floatOrb2 10s ease-in-out infinite;
+}
+
+.lucy-bg-particles {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, var(--color-primary) 2px, transparent 2px),
+    radial-gradient(circle at 60% 70%, var(--color-accent) 2px, transparent 2px),
+    radial-gradient(circle at 80% 20%, var(--color-secondary) 2px, transparent 2px),
+    radial-gradient(circle at 40% 80%, var(--color-primary) 2px, transparent 2px),
+    radial-gradient(circle at 90% 50%, var(--color-accent) 2px, transparent 2px);
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+  opacity: 0.3;
+  animation: floatParticles 20s ease-in-out infinite;
+}
+
+@keyframes floatParticles {
+  0%, 100% { background-position: 0% 0%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+}
+
+/* Services Section - Animated Grid */
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.05; }
+  50% { opacity: 0.15; }
+}
+
+.services-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    repeating-linear-gradient(0deg, var(--color-primary), var(--color-primary) 1px, transparent 1px, transparent 60px),
+    repeating-linear-gradient(90deg, var(--color-primary), var(--color-primary) 1px, transparent 1px, transparent 60px);
+  opacity: 0.1;
+  animation: gridPulse 4s ease-in-out infinite;
+}
+
+.services-bg-mesh::before,
+.services-bg-mesh::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 48%, var(--color-accent) 48%, var(--color-accent) 52%, transparent 52%);
+  background-size: 80px 80px;
+  opacity: 0.03;
+}
+
+.services-bg-mesh::after {
+  background: linear-gradient(-45deg, transparent 48%, var(--color-secondary) 48%, var(--color-secondary) 52%, transparent 52%);
+  background-size: 80px 80px;
+  opacity: 0.03;
+  animation: gridPulse 6s ease-in-out infinite;
+}
+
+/* Coming Soon - Diagonal Scanlines */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.comingsoon-bg-scanlines {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.comingsoon-bg-scanlines::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    var(--color-secondary) 2px,
+    var(--color-secondary) 4px
+  );
+  opacity: 0.05;
+  animation: scanline 8s linear infinite;
+}
+
+.comingsoon-bg-scanlines::after {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    var(--color-accent) 10px,
+    var(--color-accent) 11px
+  );
+  opacity: 0.03;
+  animation: scanline 12s linear infinite reverse;
+}
+
+/* Portfolio - Radial Gradient Orbs */
+@keyframes moveOrb1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(100px, -80px); }
+}
+
+@keyframes moveOrb2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-120px, 60px); }
+}
+
+@keyframes moveOrb3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(80px, 90px); }
+}
+
+.portfolio-bg-orbs {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.portfolio-bg-orbs::before,
+.portfolio-bg-orbs::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.08;
+}
+
+.portfolio-bg-orbs::before {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
+  top: 20%;
+  right: 10%;
+  animation: moveOrb1 15s ease-in-out infinite;
+}
+
+.portfolio-bg-orbs::after {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+  bottom: 10%;
+  left: 5%;
+  animation: moveOrb2 18s ease-in-out infinite;
+}
+
+.portfolio-bg-orb3 {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);
+  filter: blur(60px);
+  opacity: 0.08;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: moveOrb3 20s ease-in-out infinite;
+}
+
+/* Contact Section - Dots/Stars Pattern */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes moveDots {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, -20px); }
+}
+
+.contact-bg-dots {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 10% 20%, var(--color-primary) 1px, transparent 1px),
+    radial-gradient(circle at 80% 80%, var(--color-accent) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, var(--color-secondary) 1px, transparent 1px),
+    radial-gradient(circle at 90% 30%, var(--color-primary) 1px, transparent 1px),
+    radial-gradient(circle at 20% 70%, var(--color-accent) 1px, transparent 1px);
+  background-size: 100px 100px, 120px 120px, 80px 80px, 150px 150px, 90px 90px;
+  opacity: 0.3;
+  animation: moveDots 10s ease-in-out infinite, twinkle 3s ease-in-out infinite;
+}
+
+.contact-bg-stars {
+  position: absolute;
+  inset: 0;
+}
+
+.contact-bg-stars::before,
+.contact-bg-stars::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  box-shadow: 
+    40px 80px 0 0 var(--color-primary),
+    120px 30px 0 0 var(--color-secondary),
+    200px 120px 0 0 var(--color-accent),
+    300px 60px 0 0 var(--color-primary),
+    80px 200px 0 0 var(--color-secondary),
+    180px 180px 0 0 var(--color-accent),
+    250px 20px 0 0 var(--color-primary),
+    350px 150px 0 0 var(--color-secondary);
+  opacity: 0.4;
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+.contact-bg-stars::after {
+  left: 50%;
+  animation-delay: 1s;
+}

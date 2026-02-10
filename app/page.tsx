@@ -83,6 +83,10 @@ export default function Home() {
 
       {/* Lucy Section - MOST IMPORTANT! */}
       <section id="lucy" className="py-24 px-6 bg-[var(--color-card)] relative overflow-hidden">
+        {/* Dynamic Background - Floating Orbs & Particles */}
+        <div className="lucy-bg-orbs absolute inset-0" />
+        <div className="lucy-bg-particles absolute inset-0" />
+        
         {/* Background decoration */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-accent)]/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-[var(--color-primary)]/5 rounded-full blur-3xl" />
@@ -183,8 +187,12 @@ export default function Home() {
       </section>
 
       {/* Services Section - EXACT PRICES */}
-      <section id="services" className="py-24 px-6 bg-[var(--color-background)]">
-        <div className="max-w-6xl mx-auto">
+      <section id="services" className="py-24 px-6 bg-[var(--color-background)] relative overflow-hidden">
+        {/* Dynamic Background - Animated Grid/Mesh */}
+        <div className="services-bg-grid absolute inset-0" />
+        <div className="services-bg-mesh absolute inset-0" />
+        
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <span className="text-[var(--color-accent)] font-medium mb-4 block">სერვისები</span>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">რას <span className="text-gradient">ვაკეთებთ</span></h2>
@@ -316,8 +324,11 @@ export default function Home() {
       </section>
 
       {/* Coming Soon Services */}
-      <section className="py-24 px-6 bg-[var(--color-card)]">
-        <div className="max-w-6xl mx-auto">
+      <section className="py-24 px-6 bg-[var(--color-card)] relative overflow-hidden">
+        {/* Dynamic Background - Diagonal Scanlines */}
+        <div className="comingsoon-bg-scanlines absolute inset-0" />
+        
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <span className="text-[var(--color-secondary)] font-medium mb-4 block">მალე</span>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">რა <span className="text-gradient">გველოდება</span></h2>
@@ -347,8 +358,12 @@ export default function Home() {
       </section>
 
       {/* Portfolio Section - REAL PROJECTS ONLY */}
-      <section id="portfolio" className="py-24 px-6 bg-[var(--color-background)]">
-        <div className="max-w-6xl mx-auto">
+      <section id="portfolio" className="py-24 px-6 bg-[var(--color-background)] relative overflow-hidden">
+        {/* Dynamic Background - Radial Gradient Orbs */}
+        <div className="portfolio-bg-orbs absolute inset-0" />
+        <div className="portfolio-bg-orb3 absolute inset-0" />
+        
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <span className="text-[var(--color-accent)] font-medium mb-4 block">პორტფოლიო</span>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">ჩვენი <span className="text-gradient">ნამუშევრები</span></h2>
@@ -436,8 +451,12 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 px-6 bg-[var(--color-card)]">
-        <div className="max-w-6xl mx-auto">
+      <section id="contact" className="py-24 px-6 bg-[var(--color-card)] relative overflow-hidden">
+        {/* Dynamic Background - Dots/Stars Pattern */}
+        <div className="contact-bg-dots absolute inset-0" />
+        <div className="contact-bg-stars absolute inset-0" />
+        
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <span className="text-[var(--color-accent)] font-medium mb-4 block">კონტაქტი</span>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">მოდი <span className="text-gradient">ვისაუბროთ</span></h2>
