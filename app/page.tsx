@@ -167,7 +167,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold mb-2">მრავალენოვანი</h3>
-                    <p className="text-[var(--color-muted)]">საუბრობს ქართულად, ინგლისურად, რუსულად — როგორც შენ გინდა</p>
+                    <p className="text-[var(--color-muted)]">საუბრობს ქართულად, ინგლისურად, უკრაინულად — როგორც შენ გინდა</p>
                   </div>
                 </div>
               </div>

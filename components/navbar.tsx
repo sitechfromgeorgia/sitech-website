@@ -17,7 +17,7 @@ export default function Navbar() {
             <a href="#services" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">სერვისები</a>
             <a href="#portfolio" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">პორტფოლიო</a>
             <a href="#contact" className="text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">კონტაქტი</a>
-            <a href="https://t.me/sitech_georgia" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white rounded-full font-medium transition-colors">
+            <a href="https://t.me/SiTechagencybot" target="_blank" rel="noopener noreferrer" className="px-6 py-2 bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white rounded-full font-medium transition-colors">
               💬 მომწერე
             </a>
           </div>
@@ -40,7 +40,7 @@ export default function Navbar() {
             <a href="#services" onClick={() => setIsMenuOpen(false)} className="block text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">სერვისები</a>
             <a href="#portfolio" onClick={() => setIsMenuOpen(false)} className="block text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">პორტფოლიო</a>
             <a href="#contact" onClick={() => setIsMenuOpen(false)} className="block text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors">კონტაქტი</a>
-            <a href="https://t.me/sitech_georgia" target="_blank" rel="noopener noreferrer" className="block px-6 py-2 bg-[var(--color-primary)] text-white rounded-full font-medium text-center">
+            <a href="https://t.me/SiTechagencybot" target="_blank" rel="noopener noreferrer" className="block px-6 py-2 bg-[var(--color-primary)] text-white rounded-full font-medium text-center">
               💬 მომწერე
             </a>
           </div>
