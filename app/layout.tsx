@@ -1,18 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Noto_Sans_Georgian, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import Navbar from "@/components/navbar";
 import { Footer } from "@/components/footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const notoGeo = Noto_Sans_Georgian({
+  variable: "--font-georgian",
+  subsets: ["georgian"],
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -29,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="ka" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${notoGeo.variable} ${jetbrains.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"
