@@ -459,7 +459,7 @@ export default function Home() {
           <div className="text-center mb-16">
             <span className="text-[var(--color-accent)] font-medium mb-4 block">კონტაქტი</span>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">მოდი <span className="text-gradient">ვისაუბროთ</span></h2>
-            <p className="text-[var(--color-muted)] text-lg">გვიყევი შენი იდეის შესახებ — უფასო კონსულტაცია!</p>
+            <p className="text-[var(--color-muted)] text-lg">მოგვიყევით შენი იდეის შესახებ — უფასო კონსულტაცია!</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">

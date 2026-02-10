@@ -12,7 +12,7 @@ export function Footer() {
               SiTech
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              ციფრული სააგენტო თბილისიდან. ვქმნით თანამედროვე ვებ გადაწყვეტილებებს.
+              ციფრული სააგენტო ბათუმიდან. ვქმნით თანამედროვე ვებ გადაწყვეტილებებს.
             </p>
           </div>
 
@@ -60,19 +60,19 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
               <li className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
-                <a href="mailto:info@sitech.ge" className="hover:text-primary transition-colors">
-                  info@sitech.ge
+                <a href="mailto:hello@sitech.ge" className="hover:text-primary transition-colors">
+                  hello@sitech.ge
                 </a>
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="h-4 w-4" />
-                <a href="tel:+995123456789" className="hover:text-primary transition-colors">
-                  +995 123 456 789
+                <a href="tel:+995593003040" className="hover:text-primary transition-colors">
+                  +995 593 003 040
                 </a>
               </li>
               <li className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span>თბილისი, საქართველო</span>
+                <span>ბათუმი, საქართველო</span>
               </li>
             </ul>
           </div>
