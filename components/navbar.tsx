@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
-import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { href: "/", label: "მთავარი" },
@@ -26,25 +25,20 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="flex items-center"
-            >
+            <div className="flex items-center animate-slideDown">
               <span className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
                 SiTech
               </span>
-            </motion.div>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link, index) => (
-              <motion.div
+              <div
                 key={link.href}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                className="animate-slideDown"
+                style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <Link
                   href={link.href}
@@ -56,7 +50,7 @@ export function Navbar() {
                 >
                   {link.label}
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -81,33 +75,28 @@ export function Navbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-t border-gray-200 dark:border-gray-800"
-          >
-            <div className="container mx-auto px-4 py-4 space-y-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`block py-2 text-sm font-medium transition-colors hover:text-primary ${
-                    pathname === link.href
-                      ? "text-primary"
-                      : "text-gray-600 dark:text-gray-400"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div
+        className={`md:hidden border-t border-gray-200 dark:border-gray-800 overflow-hidden transition-all duration-300 ${
+          mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="container mx-auto px-4 py-4 space-y-4">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className={`block py-2 text-sm font-medium transition-colors hover:text-primary ${
+                pathname === link.href
+                  ? "text-primary"
+                  : "text-gray-600 dark:text-gray-400"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </div>
     </nav>
   );
 }

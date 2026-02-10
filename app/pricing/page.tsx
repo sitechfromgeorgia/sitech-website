@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Check, Sparkles, Zap, Rocket, Crown } from "lucide-react";
 import Link from "next/link";
 
@@ -89,24 +88,7 @@ const addons = [
   { name: "კონტენტის შექმნა", price: "100-300₾/გვერდი" }
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 }
-  }
-};
 
 export default function PricingPage() {
   return (
@@ -114,10 +96,7 @@ export default function PricingPage() {
       {/* Header */}
       <section className="py-20 bg-gradient-to-br from-primary/10 via-purple-500/5 to-background">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+          <div
             className="mx-auto max-w-3xl text-center"
           >
             <h1 className="mb-4 text-4xl font-bold md:text-5xl lg:text-6xl">
@@ -126,26 +105,21 @@ export default function PricingPage() {
             <p className="text-lg text-gray-600 dark:text-gray-400 md:text-xl">
               აირჩიეთ თქვენი ბიზნესისთვის შესაფერისი პაკეტი
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Pricing Cards */}
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+          <div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {plans.map((plan, index) => {
               const Icon = plan.icon;
               return (
-                <motion.div
+                <div
                   key={index}
-                  variants={itemVariants}
-                  whileHover={{ y: -8, scale: 1.02 }}
                   className={`relative overflow-hidden rounded-2xl border ${
                     plan.popular
                       ? "border-primary shadow-xl shadow-primary/20"
@@ -187,9 +161,7 @@ export default function PricingPage() {
 
                   {/* CTA Button */}
                   <Link href="/contact">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                    <button
                       className={`w-full rounded-lg ${
                         plan.popular
                           ? `bg-gradient-to-r ${plan.gradient} text-white shadow-lg`
@@ -197,49 +169,42 @@ export default function PricingPage() {
                       } px-6 py-3 text-sm font-medium transition-all`}
                     >
                       დაიწყეთ ახლავე
-                    </motion.button>
+                    </button>
                   </Link>
 
                   {/* Background Glow */}
                   {plan.popular && (
                     <div className={`absolute -bottom-8 -right-8 h-64 w-64 rounded-full bg-gradient-to-br ${plan.gradient} opacity-10 blur-3xl`} />
                   )}
-                </motion.div>
+                </div>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Add-ons */}
       <section className="py-20 bg-gray-100 dark:bg-gray-900/30">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <div
             className="mb-12 text-center"
           >
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">დამატებითი სერვისები</h2>
             <p className="text-gray-600 dark:text-gray-400">
               გააფართოვეთ თქვენი პაკეტი დამატებითი ფუნქციებით
             </p>
-          </motion.div>
+          </div>
 
           <div className="mx-auto max-w-3xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {addons.map((addon, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
                   className="flex items-center justify-between rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-4 transition-all hover:shadow-lg hover:shadow-primary/5"
                 >
                   <span className="font-medium">{addon.name}</span>
                   <span className="text-primary font-semibold">{addon.price}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -249,10 +214,7 @@ export default function PricingPage() {
       {/* FAQ Note */}
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+          <div
             className="mx-auto max-w-3xl rounded-2xl bg-gradient-to-br from-primary via-purple-600 to-pink-600 p-12 text-center text-white"
           >
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">
@@ -262,15 +224,13 @@ export default function PricingPage() {
               დაგვიკავშირდით უფასო კონსულტაციისთვის და დეტალური ინფორმაციისთვის
             </p>
             <Link href="/contact">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <button
                 className="inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 text-sm font-medium text-primary shadow-lg transition-all hover:bg-white/90"
               >
                 დაგვიკავშირდით
-              </motion.button>
+              </button>
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

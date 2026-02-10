@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Target, Heart, Zap, Users, Award, TrendingUp } from "lucide-react";
 
 const values = [
@@ -44,24 +43,7 @@ const technologies = [
   { name: "AI/ML", category: "Intelligence" }
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 }
-  }
-};
 
 export default function AboutPage() {
   return (
@@ -69,10 +51,7 @@ export default function AboutPage() {
       {/* Header */}
       <section className="py-20 bg-gradient-to-br from-primary/10 via-purple-500/5 to-background">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+          <div
             className="mx-auto max-w-3xl text-center"
           >
             <h1 className="mb-4 text-4xl font-bold md:text-5xl lg:text-6xl">
@@ -81,7 +60,7 @@ export default function AboutPage() {
             <p className="text-lg text-gray-600 dark:text-gray-400 md:text-xl">
               ციფრული სააგენტო, რომელიც ქმნის მომავალს
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -89,10 +68,7 @@ export default function AboutPage() {
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mx-auto max-w-4xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+            <div
               className="space-y-6 text-lg text-gray-600 dark:text-gray-400"
             >
               <p>
@@ -108,7 +84,7 @@ export default function AboutPage() {
                 ჩვენ ვიყენებთ უახლეს ტექნოლოგიებს და best practices-ს, რათა უზრუნველვყოთ
                 მაღალი ხარისხი, სიჩქარე და მასშტაბირებადობა.
               </p>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -116,32 +92,23 @@ export default function AboutPage() {
       {/* Values */}
       <section className="py-20 bg-gray-100 dark:bg-gray-900/30">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <div
             className="mb-16 text-center"
           >
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">ჩვენი ღირებულებები</h2>
             <p className="text-gray-600 dark:text-gray-400">
               პრინციპები, რომლებიც ხელმძღვანელობს ჩვენს მუშაობას
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          <div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           >
             {values.map((value, index) => {
               const Icon = value.icon;
               return (
-                <motion.div
+                <div
                   key={index}
-                  variants={itemVariants}
-                  whileHover={{ y: -5 }}
                   className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-6 transition-all hover:shadow-lg hover:shadow-primary/5"
                 >
                   <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
@@ -149,29 +116,24 @@ export default function AboutPage() {
                   </div>
                   <h3 className="mb-2 text-lg font-semibold">{value.title}</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400">{value.description}</p>
-                </motion.div>
+                </div>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Stats */}
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          <div
             className="grid grid-cols-2 md:grid-cols-4 gap-8"
           >
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               return (
-                <motion.div
+                <div
                   key={index}
-                  variants={itemVariants}
                   className="text-center"
                 >
                   <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-600 text-white shadow-lg">
@@ -181,51 +143,40 @@ export default function AboutPage() {
                     {stat.value}
                   </div>
                   <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
-                </motion.div>
+                </div>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Technologies */}
       <section className="py-20 bg-gray-100 dark:bg-gray-900/30">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <div
             className="mb-16 text-center"
           >
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">ტექნოლოგიები</h2>
             <p className="text-gray-600 dark:text-gray-400">
               თანამედროვე ინსტრუმენტები უმაღლესი ხარისხისთვის
             </p>
-          </motion.div>
+          </div>
 
           <div className="mx-auto max-w-4xl">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
+            <div
               className="flex flex-wrap justify-center gap-4"
             >
               {technologies.map((tech, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.05 }}
-                  whileHover={{ scale: 1.05 }}
                   className="group relative overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 px-6 py-3 transition-all hover:shadow-lg hover:shadow-primary/5"
                 >
                   <div className="text-sm font-medium">{tech.name}</div>
                   <div className="text-xs text-gray-600 dark:text-gray-400">{tech.category}</div>
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-purple-500/5 opacity-0 transition-opacity group-hover:opacity-100" />
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -233,10 +184,7 @@ export default function AboutPage() {
       {/* CTA */}
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+          <div
             className="mx-auto max-w-3xl rounded-2xl bg-gradient-to-br from-primary via-purple-600 to-pink-600 p-12 text-center text-white"
           >
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">
@@ -245,15 +193,13 @@ export default function AboutPage() {
             <p className="mb-8 text-lg text-white/90">
               დავიწყოთ ერთად თქვენი ციფრული ტრანსფორმაციის მოგზაურობა
             </p>
-            <motion.a
+            <a
               href="/contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               className="inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 text-sm font-medium text-primary shadow-lg transition-all hover:bg-white/90"
             >
               დაგვიკავშირდით
-            </motion.a>
-          </motion.div>
+            </a>
+          </div>
         </div>
       </section>
     </div>

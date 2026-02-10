@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Code, Brain, Smartphone, TrendingUp, Palette, Database, Shield, Zap } from "lucide-react";
 
 const services = [
@@ -118,24 +117,7 @@ const services = [
   }
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5 }
-  }
-};
 
 export default function ServicesPage() {
   return (
@@ -143,10 +125,7 @@ export default function ServicesPage() {
       {/* Header */}
       <section className="py-20 bg-gradient-to-br from-primary/10 via-purple-500/5 to-background">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+          <div
             className="mx-auto max-w-3xl text-center"
           >
             <h1 className="mb-4 text-4xl font-bold md:text-5xl lg:text-6xl">
@@ -155,26 +134,21 @@ export default function ServicesPage() {
             <p className="text-lg text-gray-600 dark:text-gray-400 md:text-xl">
               სრული სპექტრის ციფრული გადაწყვეტილებები თქვენი ბიზნესის ზრდისთვის
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Services Grid */}
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
+          <div
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
           >
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
-                <motion.div
+                <div
                   key={index}
-                  variants={itemVariants}
-                  whileHover={{ y: -5 }}
                   className="group relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-8 transition-all hover:shadow-xl hover:shadow-primary/10"
                 >
                   {/* Icon and Title */}
@@ -198,20 +172,17 @@ export default function ServicesPage() {
 
                   {/* Background Glow Effect */}
                   <div className={`absolute -bottom-4 -right-4 h-32 w-32 rounded-full bg-gradient-to-br ${service.gradient} opacity-0 blur-3xl transition-opacity group-hover:opacity-20`} />
-                </motion.div>
+                </div>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gray-100 dark:bg-gray-900/30">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+          <div
             className="mx-auto max-w-3xl rounded-2xl bg-gradient-to-br from-primary via-purple-600 to-pink-600 p-12 text-center text-white"
           >
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">
@@ -220,15 +191,13 @@ export default function ServicesPage() {
             <p className="mb-8 text-lg text-white/90">
               დაგვიკავშირდით უფასო კონსულტაციისთვის - ჩვენ დაგეხმარებით სწორი გადაწყვეტის არჩევაში
             </p>
-            <motion.a
+            <a
               href="/contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               className="inline-flex items-center justify-center rounded-lg bg-white px-8 py-3 text-sm font-medium text-primary shadow-lg transition-all hover:bg-white/90"
             >
               უფასო კონსულტაცია
-            </motion.a>
-          </motion.div>
+            </a>
+          </div>
         </div>
       </section>
     </div>
