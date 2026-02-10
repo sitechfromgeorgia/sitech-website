@@ -9,6 +9,12 @@ export default function Home() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Chat widget state
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: "", contact: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -538,30 +544,158 @@ export default function Home() {
       </footer>
 
       {/* Lucy Chat Widget - Fixed Bottom Right */}
-      <a
-        href="https://t.me/SiTechagencybot"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 group"
-      >
-        <div className="relative">
-          {/* Pulse ring */}
-          <div className="absolute inset-0 bg-[var(--color-primary)] rounded-full animate-ping opacity-20" />
-          {/* Main button */}
-          <div className="relative w-16 h-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center shadow-2xl shadow-[var(--color-primary)]/30 group-hover:scale-110 group-hover:shadow-[var(--color-primary)]/50 transition-all duration-300">
-            <Image src="/lucy-avatar.png" alt="Lucy" width={40} height={40} className="rounded-full" />
+      <div className="fixed bottom-6 right-6 z-50">
+        {/* Floating button */}
+        <button
+          onClick={() => {
+            setIsPanelOpen(!isPanelOpen);
+            setIsSuccess(false);
+          }}
+          className="group relative"
+        >
+          <div className="relative">
+            {/* Pulse ring */}
+            <div className="absolute inset-0 bg-[var(--color-primary)] rounded-full animate-ping opacity-20" />
+            {/* Main button */}
+            <div className="relative w-16 h-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] rounded-full flex items-center justify-center shadow-2xl shadow-[var(--color-primary)]/30 group-hover:scale-110 group-hover:shadow-[var(--color-primary)]/50 transition-all duration-300">
+              <Image src="/lucy-avatar.png" alt="Lucy" width={40} height={40} className="rounded-full" />
+            </div>
+            {/* Online badge */}
+            <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-[var(--color-background)] flex items-center justify-center">
+              <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+            </div>
+            {/* Tooltip */}
+            <div className="absolute bottom-full right-0 mb-3 px-4 py-2 bg-[var(--color-card)] border border-[var(--color-border)] rounded-xl text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-xl">
+              💬 მომწერე ლუსის!
+              <div className="absolute top-full right-6 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-[var(--color-card)]" />
+            </div>
           </div>
-          {/* Online badge */}
-          <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-[var(--color-background)] flex items-center justify-center">
-            <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-          </div>
-          {/* Tooltip */}
-          <div className="absolute bottom-full right-0 mb-3 px-4 py-2 bg-[var(--color-card)] border border-[var(--color-border)] rounded-xl text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-xl">
-            💬 მომწერე ლუსის!
-            <div className="absolute top-full right-6 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-[var(--color-card)]" />
-          </div>
+        </button>
+
+        {/* Slide-out panel */}
+        <div
+          className={`absolute bottom-20 right-0 w-[380px] bg-[var(--color-card)] border-2 border-[var(--color-primary)] rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 origin-bottom-right ${
+            isPanelOpen ? "scale-100 opacity-100" : "scale-0 opacity-0 pointer-events-none"
+          }`}
+        >
+          {!isSuccess ? (
+            <>
+              {/* Header */}
+              <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white">
+                <h3 className="text-lg font-bold">💬 მომწერე ლუსის</h3>
+                <button
+                  onClick={() => setIsPanelOpen(false)}
+                  className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Form */}
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setIsSubmitting(true);
+                  try {
+                    const response = await fetch("https://n8n.caucasusdancebridge.com/webhook/sitech-contact", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(formData),
+                    });
+                    if (response.ok) {
+                      setIsSuccess(true);
+                      setFormData({ name: "", contact: "", message: "" });
+                    }
+                  } catch (error) {
+                    console.error("Error:", error);
+                  } finally {
+                    setIsSubmitting(false);
+                  }
+                }}
+                className="p-4 space-y-4"
+              >
+                <div>
+                  <label className="block text-sm font-medium mb-1">სახელი</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-2 rounded-lg bg-[var(--color-background)] border border-[var(--color-border)] focus:border-[var(--color-primary)] focus:outline-none transition-colors"
+                    placeholder="შენი სახელი"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">ტელეფონი ან Email</label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.contact}
+                    onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                    className="w-full px-4 py-2 rounded-lg bg-[var(--color-background)] border border-[var(--color-border)] focus:border-[var(--color-primary)] focus:outline-none transition-colors"
+                    placeholder="+995 XXX XX XX XX"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">შეტყობინება</label>
+                  <textarea
+                    required
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-4 py-2 rounded-lg bg-[var(--color-background)] border border-[var(--color-border)] focus:border-[var(--color-primary)] focus:outline-none transition-colors resize-none"
+                    rows={4}
+                    placeholder="როგორ შემიძლია დაგეხმარო?"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white font-semibold rounded-lg hover:opacity-90 disabled:opacity-50 transition-opacity"
+                >
+                  {isSubmitting ? "იგზავნება..." : "გაგზავნა"}
+                </button>
+
+                <p className="text-xs text-center text-[var(--color-muted)]">
+                  ან დაგვიკავშირდი:{" "}
+                  <a
+                    href="https://t.me/SiTechagencybot"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[var(--color-primary)] hover:underline"
+                  >
+                    Telegram
+                  </a>
+                  {" | "}
+                  <a
+                    href="mailto:hello@sitech.ge"
+                    className="text-[var(--color-primary)] hover:underline"
+                  >
+                    Email
+                  </a>
+                </p>
+              </form>
+            </>
+          ) : (
+            <div className="p-8 text-center">
+              <div className="text-6xl mb-4">✅</div>
+              <h3 className="text-xl font-bold mb-2">მადლობა!</h3>
+              <p className="text-[var(--color-muted)]">ლუსი მალე დაგიკავშირდება!</p>
+              <button
+                onClick={() => {
+                  setIsSuccess(false);
+                  setIsPanelOpen(false);
+                }}
+                className="mt-6 px-6 py-2 bg-[var(--color-primary)] text-white rounded-full font-medium hover:opacity-90 transition-opacity"
+              >
+                დახურვა
+              </button>
+            </div>
+          )}
         </div>
-      </a>
+      </div>
     </main>
   );
 }
