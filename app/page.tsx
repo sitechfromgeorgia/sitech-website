@@ -379,11 +379,11 @@ export default function Home() {
               className="group block rounded-2xl overflow-hidden bg-[var(--color-card)] border-2 border-[var(--color-primary)] hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
               <div className="relative">
-                <div className="absolute top-4 right-4 z-10 bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-                  ✅ ჩაბარებული
+                <div className="absolute top-4 right-4 z-10 bg-[var(--color-primary)] text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+                  🔄 მიმდინარე
                 </div>
                 <div className="aspect-video bg-gradient-to-br from-green-600 to-emerald-700 flex items-center justify-center text-7xl">
-                  🏡
+                  📦
                 </div>
               </div>
               <div className="p-6">
@@ -391,11 +391,11 @@ export default function Home() {
                   <h3 className="text-xl font-bold group-hover:text-[var(--color-primary)] transition-colors">Greenland77.ge</h3>
                   <ExternalLink className="w-5 h-5 text-[var(--color-muted)] group-hover:text-[var(--color-primary)] transition-colors" />
                 </div>
-                <p className="text-[var(--color-muted)] text-sm mb-4">უძრავი ქონების სააგენტოს ვებსაიტი</p>
+                <p className="text-[var(--color-muted)] text-sm mb-4">დისტრიბუციის პლატფორმა</p>
                 <div className="flex gap-2 flex-wrap">
                   <span className="px-2.5 py-1 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded-lg text-xs font-medium">Next.js</span>
-                  <span className="px-2.5 py-1 bg-green-500/10 text-green-500 rounded-lg text-xs font-medium">უძრავი ქონება</span>
-                  <span className="px-2.5 py-1 bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded-lg text-xs font-medium">კორპორატიული</span>
+                  <span className="px-2.5 py-1 bg-green-500/10 text-green-500 rounded-lg text-xs font-medium">დისტრიბუცია</span>
+                  <span className="px-2.5 py-1 bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded-lg text-xs font-medium">Supabase</span>
                 </div>
               </div>
             </a>
@@ -408,8 +408,8 @@ export default function Home() {
               className="group block rounded-2xl overflow-hidden bg-[var(--color-card)] border-2 border-[var(--color-accent)] hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
               <div className="relative">
-                <div className="absolute top-4 right-4 z-10 bg-green-500 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-                  ✅ ჩაბარებული
+                <div className="absolute top-4 right-4 z-10 bg-[var(--color-accent)] text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
+                  🔄 მიმდინარე
                 </div>
                 <div className="aspect-video bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-7xl">
                   💼
@@ -417,14 +417,13 @@ export default function Home() {
               </div>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xl font-bold group-hover:text-[var(--color-accent)] transition-colors">WIG Landing</h3>
+                  <h3 className="text-xl font-bold group-hover:text-[var(--color-accent)] transition-colors">WIG</h3>
                   <ExternalLink className="w-5 h-5 text-[var(--color-muted)] group-hover:text-[var(--color-accent)] transition-colors" />
                 </div>
-                <p className="text-[var(--color-muted)] text-sm mb-4">ბიზნეს კონსულტაციის ლენდინგ გვერდი</p>
+                <p className="text-[var(--color-muted)] text-sm mb-4">ბიზნეს ლენდინგი</p>
                 <div className="flex gap-2 flex-wrap">
                   <span className="px-2.5 py-1 bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded-lg text-xs font-medium">Landing</span>
                   <span className="px-2.5 py-1 bg-purple-500/10 text-purple-500 rounded-lg text-xs font-medium">ბიზნესი</span>
-                  <span className="px-2.5 py-1 bg-pink-500/10 text-pink-500 rounded-lg text-xs font-medium">კონსულტაცია</span>
                 </div>
               </div>
             </a>
