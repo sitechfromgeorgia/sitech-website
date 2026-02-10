@@ -232,7 +232,7 @@ export default function Home() {
                 <div className="mb-4"><Image src="/icons/icon-business-site.jpg" alt="ბიზნეს საიტი" width={64} height={64} className="rounded-lg" /></div>
                 <h3 className="text-xl font-bold mb-2">ბიზნეს საიტი</h3>
                 <p className="text-[var(--color-muted)] text-sm mb-4">3-5 გვერდიანი საიტი</p>
-                <div className="text-3xl font-bold text-[var(--color-secondary)] mb-2">500-1,500₾</div>
+                <div className="text-3xl font-bold text-[var(--color-secondary)] mb-2">500₾-დან</div>
               </div>
             </div>
 
@@ -244,7 +244,7 @@ export default function Home() {
                 <div className="mb-4"><Image src="/icons/icon-complex-app.jpg" alt="კომპლექსური საიტი/აპი" width={64} height={64} className="rounded-lg" /></div>
                 <h3 className="text-xl font-bold mb-2">კომპლექსური საიტი/აპი</h3>
                 <p className="text-[var(--color-muted)] text-sm mb-4">სრული ფუნქციონალი</p>
-                <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">1,500-5,000₾</div>
+                <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">1,500₾-დან</div>
               </div>
             </div>
 
@@ -256,7 +256,7 @@ export default function Home() {
                 <div className="mb-4"><Image src="/icons/icon-payment.jpg" alt="გადახდის ინტეგრაცია" width={64} height={64} className="rounded-lg" /></div>
                 <h3 className="text-xl font-bold mb-2">გადახდის ინტეგრაცია</h3>
                 <p className="text-[var(--color-muted)] text-sm mb-4">TBC, BOG და სხვა</p>
-                <div className="text-3xl font-bold text-[var(--color-accent)] mb-2">5,000₾+</div>
+                <div className="text-3xl font-bold text-[var(--color-accent)] mb-2">5,000₾-დან</div>
               </div>
             </div>
 
