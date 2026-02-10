@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import Navbar from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { PWARegister } from "@/components/pwa-register";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -51,6 +52,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ka" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+        <meta name="theme-color" content="#8b5cf6" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Lucy" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-startup-image" href="/icon-512.png" />
+      </head>
       <body
         className={`${inter.variable} ${notoGeo.variable} ${jetbrains.variable} antialiased`}
       >
@@ -64,6 +74,7 @@ export default function RootLayout({
             <Navbar />
             <main className="flex-1">{children}</main>
             <Footer />
+            <PWARegister />
           </div>
         </ThemeProvider>
       </body>
