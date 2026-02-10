@@ -194,7 +194,9 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Service 1 */}
             <div className="group p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-xl transition-all">
-              <div className="text-4xl mb-4">🌐</div>
+              <div className="mb-4">
+                <Image src="/icons/icon-landing.jpg" alt="ლენდინგი" width={64} height={64} className="rounded-lg" />
+              </div>
               <h3 className="text-xl font-bold mb-2">ლენდინგი (1 ენა)</h3>
               <p className="text-[var(--color-muted)] text-sm mb-4">ერთგვერდიანი საიტი ერთ ენაზე</p>
               <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">100₾</div>
@@ -210,7 +212,9 @@ export default function Home() {
 
             {/* Service 3 */}
             <div className="group p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-secondary)] hover:shadow-xl transition-all">
-              <div className="text-4xl mb-4">💼</div>
+              <div className="mb-4">
+                <Image src="/icons/icon-business-site.jpg" alt="ბიზნეს საიტი" width={64} height={64} className="rounded-lg" />
+              </div>
               <h3 className="text-xl font-bold mb-2">ბიზნეს საიტი</h3>
               <p className="text-[var(--color-muted)] text-sm mb-4">3-5 გვერდიანი საიტი</p>
               <div className="text-3xl font-bold text-[var(--color-secondary)] mb-2">500-1,500₾</div>
@@ -218,7 +222,9 @@ export default function Home() {
 
             {/* Service 4 */}
             <div className="group p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-xl transition-all">
-              <div className="text-4xl mb-4">🚀</div>
+              <div className="mb-4">
+                <Image src="/icons/icon-complex-app.jpg" alt="კომპლექსური საიტი/აპი" width={64} height={64} className="rounded-lg" />
+              </div>
               <h3 className="text-xl font-bold mb-2">კომპლექსური საიტი/აპი</h3>
               <p className="text-[var(--color-muted)] text-sm mb-4">სრული ფუნქციონალი</p>
               <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">1,500-5,000₾</div>
@@ -226,7 +232,9 @@ export default function Home() {
 
             {/* Service 5 */}
             <div className="group p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:shadow-xl transition-all">
-              <div className="text-4xl mb-4">💳</div>
+              <div className="mb-4">
+                <Image src="/icons/icon-payment.jpg" alt="გადახდის ინტეგრაცია" width={64} height={64} className="rounded-lg" />
+              </div>
               <h3 className="text-xl font-bold mb-2">გადახდის ინტეგრაცია</h3>
               <p className="text-[var(--color-muted)] text-sm mb-4">TBC, BOG და სხვა</p>
               <div className="text-3xl font-bold text-[var(--color-accent)] mb-2">5,000₾+</div>
@@ -234,7 +242,9 @@ export default function Home() {
 
             {/* Service 6 */}
             <div className="group p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-secondary)] hover:shadow-xl transition-all">
-              <div className="text-4xl mb-4">🔧</div>
+              <div className="mb-4">
+                <Image src="/icons/icon-maintenance.jpg" alt="Maintenance" width={64} height={64} className="rounded-lg" />
+              </div>
               <h3 className="text-xl font-bold mb-2">Maintenance (პატარა)</h3>
               <p className="text-[var(--color-muted)] text-sm mb-4">მცირე საიტების მხარდაჭერა</p>
               <div className="text-3xl font-bold text-[var(--color-secondary)] mb-2">100₾/თვე</div>
@@ -244,7 +254,9 @@ export default function Home() {
             <div className="group p-6 rounded-2xl bg-[var(--color-card)] border border-[var(--color-border)] hover:border-[var(--color-primary)] hover:shadow-xl transition-all md:col-span-2 lg:col-span-3">
               <div className="flex items-center justify-between flex-wrap gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="text-4xl">⚙️</div>
+                  <div className="flex-shrink-0">
+                    <Image src="/icons/icon-maintenance.jpg" alt="Maintenance" width={64} height={64} className="rounded-lg" />
+                  </div>
                   <div>
                     <h3 className="text-xl font-bold mb-1">Maintenance (დიდი)</h3>
                     <p className="text-[var(--color-muted)] text-sm">დიდი პროექტების მხარდაჭერა</p>
@@ -301,13 +313,15 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { emoji: "🤖", title: "AI ჩატბოტები", desc: "ინტელექტუალური ბოტები თქვენი ბიზნესისთვის" },
-              { emoji: "⚡", title: "ბიზნეს ავტომატიზაცია", desc: "პროცესების ავტომატიზაცია და ოპტიმიზაცია" },
-              { emoji: "📱", title: "სოციალური ქსელების მართვა", desc: "SMM და კონტენტ მენეჯმენტი" },
-              { emoji: "🎓", title: "ტრენინგები/კურსები", desc: "ვებ ტექნოლოგიების სწავლება" },
+              { icon: "icon-ai-chatbot.jpg", title: "AI ჩატბოტები", desc: "ინტელექტუალური ბოტები თქვენი ბიზნესისთვის" },
+              { icon: "icon-automation.jpg", title: "ბიზნეს ავტომატიზაცია", desc: "პროცესების ავტომატიზაცია და ოპტიმიზაცია" },
+              { icon: "icon-smm.jpg", title: "სოციალური ქსელების მართვა", desc: "SMM და კონტენტ მენეჯმენტი" },
+              { icon: "icon-training.jpg", title: "ტრენინგები/კურსები", desc: "ვებ ტექნოლოგიების სწავლება" },
             ].map((service) => (
               <div key={service.title} className="p-6 rounded-2xl bg-[var(--color-background)] border border-dashed border-[var(--color-border)] opacity-75 hover:opacity-100 transition-opacity">
-                <div className="text-5xl mb-4">{service.emoji}</div>
+                <div className="mb-4">
+                  <Image src={`/icons/${service.icon}`} alt={service.title} width={64} height={64} className="rounded-lg" />
+                </div>
                 <h3 className="text-lg font-bold mb-2">{service.title}</h3>
                 <p className="text-[var(--color-muted)] text-sm">{service.desc}</p>
                 <div className="mt-4 inline-block px-3 py-1 bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] rounded-full text-xs font-medium">
