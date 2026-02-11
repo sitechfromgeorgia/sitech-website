@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Noto_Sans_Georgian, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { LanguageProvider } from "@/lib/language-context";
 import Navbar from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { PWARegister } from "@/components/pwa-register";
@@ -70,12 +71,14 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative flex min-h-screen flex-col">
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <PWARegister />
-          </div>
+          <LanguageProvider>
+            <div className="relative flex min-h-screen flex-col">
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <PWARegister />
+            </div>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
