@@ -10,8 +10,8 @@ interface Message {
 
 const GATEWAY_TOKEN = process.env.NEXT_PUBLIC_OPENCLAW_TOKEN || "";
 
-function generateId() {
-  return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+function uuid() {
+  return crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
 
 export default function OpenClawChat() {
@@ -23,22 +23,38 @@ export default function OpenClawChat() {
   const wsRef = useRef<WebSocket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const reconnectTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const pendingRef = useRef<Map<string, (data: unknown) => void>>(new Map());
+  const challengeHandled = useRef(false);
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, []);
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages, isTyping, scrollToBottom]);
+  useEffect(() => { scrollToBottom(); }, [messages, isTyping, scrollToBottom]);
 
-  const sendRequest = useCallback((method: string, params: Record<string, unknown> = {}) => {
-    if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) return null;
-    const id = generateId();
-    const frame = { type: "req", id, method, params };
-    wsRef.current.send(JSON.stringify(frame));
-    return id;
+  const sendConnect = useCallback((ws: WebSocket) => {
+    ws.send(JSON.stringify({
+      type: "req",
+      id: uuid(),
+      method: "connect",
+      params: {
+        minProtocol: 3,
+        maxProtocol: 3,
+        client: {
+          id: "openclaw-control-ui",
+          version: "1.0.0",
+          platform: typeof navigator !== "undefined" ? navigator.platform : "web",
+          mode: "webchat",
+        },
+        role: "operator",
+        scopes: ["operator.read", "operator.write"],
+        caps: [],
+        commands: [],
+        permissions: {},
+        auth: GATEWAY_TOKEN ? { token: GATEWAY_TOKEN } : undefined,
+        locale: typeof navigator !== "undefined" ? navigator.language : "en",
+        userAgent: "sitech-webchat/1.0.0",
+      },
+    }));
   }, []);
 
   const connect = useCallback(() => {
@@ -48,85 +64,83 @@ export default function OpenClawChat() {
     try {
       const wsUrl = `${window.location.protocol === "https:" ? "wss:" : "ws:"}//${window.location.host}/openclaw-ws`;
       const ws = new WebSocket(wsUrl);
+      challengeHandled.current = false;
 
       ws.onopen = () => {
-        // Send OpenClaw connect handshake (first frame MUST be "connect")
-        const connectFrame = {
-          type: "req",
-          id: generateId(),
-          method: "connect",
-          params: {
-            minProtocol: 3,
-            maxProtocol: 3,
-            role: "operator",
-            scopes: [],
-            auth: GATEWAY_TOKEN ? { token: GATEWAY_TOKEN } : undefined,
-            client: {
-              id: "webchat",
-              version: "1.0.0",
-              platform: "web",
-              mode: "webchat",
-            },
-            caps: [],
-            userAgent: navigator.userAgent,
-            locale: navigator.language,
-          },
-        };
-        ws.send(JSON.stringify(connectFrame));
+        // Wait for connect.challenge or send connect immediately
+        // Some gateway versions send challenge first, others accept connect directly
+        setTimeout(() => {
+          if (!challengeHandled.current) {
+            sendConnect(ws);
+            challengeHandled.current = true;
+          }
+        }, 500);
       };
 
       ws.onmessage = (event) => {
         try {
           const data = JSON.parse(event.data);
 
-          // Handle response to connect or chat.send
-          if (data.type === "res") {
-            if (data.ok) {
-              // Connected successfully
-              setIsConnected(true);
-              const resolver = pendingRef.current.get(data.id);
-              if (resolver) {
-                resolver(data.payload);
-                pendingRef.current.delete(data.id);
-              }
+          // Handle connect.challenge
+          if (data.type === "event" && data.event === "connect.challenge") {
+            if (!challengeHandled.current) {
+              sendConnect(ws);
+              challengeHandled.current = true;
             }
             return;
           }
 
-          // Handle events (streaming)
-          if (data.type === "evt") {
-            const method = data.method || "";
+          // Handle hello-ok response
+          if (data.type === "res" && data.ok && data.payload?.type === "hello-ok") {
+            setIsConnected(true);
+            return;
+          }
 
-            if (method === "chat.tokens" || method === "chat.delta") {
+          // Handle res errors
+          if (data.type === "res" && !data.ok) {
+            console.warn("OpenClaw error:", data.error);
+            return;
+          }
+
+          // Handle chat events (streaming)
+          if (data.type === "event" && data.event === "chat") {
+            const state = data.payload?.state;
+            const text = data.payload?.text || data.payload?.message?.content || "";
+
+            if (state === "delta" && text) {
               setIsTyping(true);
-              const text = data.params?.text || data.params?.content || data.params?.delta || "";
+              setMessages((prev) => {
+                const last = prev[prev.length - 1];
+                if (last?.role === "assistant" && Date.now() - last.timestamp < 120000) {
+                  return [...prev.slice(0, -1), { ...last, content: last.content + text }];
+                }
+                return [...prev, { role: "assistant", content: text, timestamp: Date.now() }];
+              });
+            } else if (state === "final") {
+              setIsTyping(false);
               if (text) {
                 setMessages((prev) => {
                   const last = prev[prev.length - 1];
-                  if (last?.role === "assistant" && Date.now() - last.timestamp < 120000) {
-                    return [...prev.slice(0, -1), { ...last, content: last.content + text }];
+                  if (last?.role === "assistant") {
+                    return [...prev.slice(0, -1), { role: "assistant", content: text, timestamp: Date.now() }];
                   }
                   return [...prev, { role: "assistant", content: text, timestamp: Date.now() }];
                 });
               }
-            } else if (method === "chat.reply" || method === "chat.message") {
-              setIsTyping(false);
-              const content = data.params?.content || data.params?.text || data.params?.message || "";
-              if (content) {
-                setMessages((prev) => {
-                  const last = prev[prev.length - 1];
-                  if (last?.role === "assistant") {
-                    return [...prev.slice(0, -1), { role: "assistant", content, timestamp: Date.now() }];
-                  }
-                  return [...prev, { role: "assistant", content, timestamp: Date.now() }];
-                });
-              }
-            } else if (method === "chat.end" || method === "chat.done" || method === "chat.turn.end") {
+            } else if (state === "error") {
               setIsTyping(false);
             }
+            return;
           }
+
+          // Handle chat.history response
+          if (data.type === "res" && data.ok && Array.isArray(data.payload)) {
+            // History messages
+            return;
+          }
+
         } catch {
-          // ignore parse errors
+          // ignore
         }
       };
 
@@ -144,7 +158,7 @@ export default function OpenClawChat() {
     } catch {
       setIsConnected(false);
     }
-  }, [isOpen]);
+  }, [isOpen, sendConnect]);
 
   useEffect(() => {
     if (isOpen) {
@@ -171,18 +185,22 @@ export default function OpenClawChat() {
 
   const sendMessage = () => {
     const text = input.trim();
-    if (!text || !isConnected) return;
+    if (!text || !isConnected || !wsRef.current) return;
 
     setMessages((prev) => [...prev, { role: "user", content: text, timestamp: Date.now() }]);
     setInput("");
     setIsTyping(true);
 
-    sendRequest("chat.send", { message: text });
+    wsRef.current.send(JSON.stringify({
+      type: "req",
+      id: uuid(),
+      method: "chat.send",
+      params: { text },
+    }));
   };
 
   return (
     <>
-      {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-purple-700 text-white shadow-lg shadow-purple-500/30 transition-all hover:scale-105 hover:shadow-purple-500/50 active:scale-95"
@@ -199,10 +217,8 @@ export default function OpenClawChat() {
         )}
       </button>
 
-      {/* Chat Window */}
       {isOpen && (
         <div className="fixed bottom-24 right-5 z-50 flex h-[28rem] w-[22rem] flex-col overflow-hidden rounded-2xl border border-white/10 bg-gray-900/95 shadow-2xl shadow-black/40 backdrop-blur-xl sm:h-[32rem] sm:w-96">
-          {/* Header */}
           <div className="flex items-center gap-3 border-b border-white/10 bg-gradient-to-r from-violet-600/20 to-purple-600/20 px-4 py-3">
             <div className="relative">
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-violet-600 text-lg">✨</div>
@@ -214,17 +230,14 @@ export default function OpenClawChat() {
             </div>
           </div>
 
-          {/* Messages */}
           <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                <div
-                  className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
-                    msg.role === "user"
-                      ? "rounded-br-md bg-violet-600 text-white"
-                      : "rounded-bl-md bg-white/10 text-gray-100"
-                  }`}
-                >
+                <div className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
+                  msg.role === "user"
+                    ? "rounded-br-md bg-violet-600 text-white"
+                    : "rounded-bl-md bg-white/10 text-gray-100"
+                }`}>
                   {msg.content}
                 </div>
               </div>
@@ -243,7 +256,6 @@ export default function OpenClawChat() {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input */}
           <div className="border-t border-white/10 bg-gray-900/80 p-3">
             <div className="flex gap-2">
               <input
