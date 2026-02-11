@@ -214,10 +214,10 @@ export default function Home() {
               <div className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity" style={{backgroundImage: "radial-gradient(circle at 20% 50%, var(--color-primary) 1px, transparent 1px), radial-gradient(circle at 80% 20%, var(--color-accent) 1px, transparent 1px)", backgroundSize: "30px 30px, 40px 40px"}} />
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[var(--color-primary)]/10 to-transparent rounded-bl-full" />
               <div className="relative z-10">
-                <div className="mb-4"><Image src="/icons/icon-landing.jpg" alt="ლენდინგი" width={64} height={64} className="rounded-lg" /></div>
-                <h3 className="text-xl font-bold mb-2">ლენდინგი</h3>
-                <p className="text-[var(--color-muted)] text-sm mb-4">ერთგვერდიანი საიტი თქვენი ბიზნესისთვის</p>
-                <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">200₾-დან</div>
+                <div className="mb-4"><Image src="/icons/icon-landing.jpg" alt={t('services.landing')} width={64} height={64} className="rounded-lg" /></div>
+                <h3 className="text-xl font-bold mb-2">{t('services.landing')}</h3>
+                <p className="text-[var(--color-muted)] text-sm mb-4">{t('services.landingDesc')}</p>
+                <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">{t('services.landingPrice')}</div>
               </div>
             </div>
 
@@ -227,9 +227,9 @@ export default function Home() {
               <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-[var(--color-accent)]/10 to-transparent rounded-tr-full" />
               <div className="relative z-10">
                 <div className="text-4xl mb-4">🌍</div>
-                <h3 className="text-xl font-bold mb-2">+ენის დამატება</h3>
-                <p className="text-[var(--color-muted)] text-sm mb-4">დამატებითი ენის ვერსია</p>
-                <div className="text-3xl font-bold text-[var(--color-accent)] mb-2">+50₾/ენა</div>
+                <h3 className="text-xl font-bold mb-2">{t('services.addLanguage')}</h3>
+                <p className="text-[var(--color-muted)] text-sm mb-4">{t('services.addLanguageDesc')}</p>
+                <div className="text-3xl font-bold text-[var(--color-accent)] mb-2">{t('services.addLanguagePrice')}</div>
               </div>
             </div>
 
@@ -238,10 +238,10 @@ export default function Home() {
               <div className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity" style={{backgroundImage: "repeating-linear-gradient(0deg, var(--color-secondary), var(--color-secondary) 1px, transparent 1px, transparent 40px), repeating-linear-gradient(90deg, var(--color-secondary), var(--color-secondary) 1px, transparent 1px, transparent 40px)"}} />
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--color-secondary)]/20 to-transparent" />
               <div className="relative z-10">
-                <div className="mb-4"><Image src="/icons/icon-business-site.jpg" alt="ბიზნეს საიტი" width={64} height={64} className="rounded-lg" /></div>
-                <h3 className="text-xl font-bold mb-2">ბიზნეს საიტი</h3>
-                <p className="text-[var(--color-muted)] text-sm mb-4">3-5 გვერდიანი საიტი</p>
-                <div className="text-3xl font-bold text-[var(--color-secondary)] mb-2">500₾-დან</div>
+                <div className="mb-4"><Image src="/icons/icon-business-site.jpg" alt={t('services.businessSite')} width={64} height={64} className="rounded-lg" /></div>
+                <h3 className="text-xl font-bold mb-2">{t('services.businessSite')}</h3>
+                <p className="text-[var(--color-muted)] text-sm mb-4">{t('services.businessSiteDesc')}</p>
+                <div className="text-3xl font-bold text-[var(--color-secondary)] mb-2">{t('services.businessSitePrice')}</div>
               </div>
             </div>
 
@@ -250,10 +250,10 @@ export default function Home() {
               <div className="absolute inset-0 opacity-[0.05] group-hover:opacity-[0.1] transition-opacity" style={{backgroundImage: "conic-gradient(from 0deg at 50% 50%, var(--color-primary) 0deg, transparent 60deg, transparent 300deg, var(--color-primary) 360deg)", backgroundSize: "60px 60px"}} />
               <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-tl from-[var(--color-primary)]/5 to-transparent" />
               <div className="relative z-10">
-                <div className="mb-4"><Image src="/icons/icon-complex-app.jpg" alt="კომპლექსური საიტი/აპი" width={64} height={64} className="rounded-lg" /></div>
-                <h3 className="text-xl font-bold mb-2">კომპლექსური საიტი/აპი</h3>
-                <p className="text-[var(--color-muted)] text-sm mb-4">სრული ფუნქციონალი</p>
-                <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">1,500₾-დან</div>
+                <div className="mb-4"><Image src="/icons/icon-complex-app.jpg" alt={t('services.complexApp')} width={64} height={64} className="rounded-lg" /></div>
+                <h3 className="text-xl font-bold mb-2">{t('services.complexApp')}</h3>
+                <p className="text-[var(--color-muted)] text-sm mb-4">{t('services.complexAppDesc')}</p>
+                <div className="text-3xl font-bold text-[var(--color-primary)] mb-2">{t('services.complexAppPrice')}</div>
               </div>
             </div>
 
@@ -262,10 +262,10 @@ export default function Home() {
               <div className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity" style={{backgroundImage: "radial-gradient(ellipse at 30% 70%, var(--color-accent) 0%, transparent 50%), radial-gradient(ellipse at 70% 30%, var(--color-primary) 0%, transparent 50%)"}} />
               <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-[var(--color-accent)]/30 via-transparent to-[var(--color-primary)]/30" />
               <div className="relative z-10">
-                <div className="mb-4"><Image src="/icons/icon-payment.jpg" alt="გადახდის ინტეგრაცია" width={64} height={64} className="rounded-lg" /></div>
-                <h3 className="text-xl font-bold mb-2">გადახდის ინტეგრაცია</h3>
-                <p className="text-[var(--color-muted)] text-sm mb-4">TBC, BOG და სხვა</p>
-                <div className="text-3xl font-bold text-[var(--color-accent)] mb-2">5,000₾-დან</div>
+                <div className="mb-4"><Image src="/icons/icon-payment.jpg" alt={t('services.paymentIntegration')} width={64} height={64} className="rounded-lg" /></div>
+                <h3 className="text-xl font-bold mb-2">{t('services.paymentIntegration')}</h3>
+                <p className="text-[var(--color-muted)] text-sm mb-4">{t('services.paymentIntegrationDesc')}</p>
+                <div className="text-3xl font-bold text-[var(--color-accent)] mb-2">{t('services.paymentIntegrationPrice')}</div>
               </div>
             </div>
 
@@ -274,10 +274,10 @@ export default function Home() {
               <div className="absolute inset-0 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity" style={{backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 10px, var(--color-secondary) 10px, var(--color-secondary) 11px)"}} />
               <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--color-secondary)]/20 to-transparent" />
               <div className="relative z-10">
-                <div className="mb-4"><Image src="/icons/icon-maintenance.jpg" alt="Maintenance" width={64} height={64} className="rounded-lg" /></div>
-                <h3 className="text-xl font-bold mb-2">Maintenance (პატარა)</h3>
-                <p className="text-[var(--color-muted)] text-sm mb-4">მცირე საიტების მხარდაჭერა</p>
-                <div className="text-3xl font-bold text-[var(--color-secondary)] mb-2">100₾/თვე</div>
+                <div className="mb-4"><Image src="/icons/icon-maintenance.jpg" alt={t('services.maintenanceSmall')} width={64} height={64} className="rounded-lg" /></div>
+                <h3 className="text-xl font-bold mb-2">{t('services.maintenanceSmall')}</h3>
+                <p className="text-[var(--color-muted)] text-sm mb-4">{t('services.maintenanceSmallDesc')}</p>
+                <div className="text-3xl font-bold text-[var(--color-secondary)] mb-2">{t('services.maintenanceSmallPrice')}</div>
               </div>
             </div>
 
@@ -286,13 +286,13 @@ export default function Home() {
               <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity" style={{backgroundImage: "radial-gradient(circle at 10% 50%, var(--color-primary) 1px, transparent 1px), radial-gradient(circle at 90% 50%, var(--color-accent) 1px, transparent 1px)", backgroundSize: "50px 50px, 35px 35px"}} />
               <div className="relative z-10 flex items-center justify-between flex-wrap gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0"><Image src="/icons/icon-maintenance.jpg" alt="Maintenance" width={64} height={64} className="rounded-lg" /></div>
+                  <div className="flex-shrink-0"><Image src="/icons/icon-maintenance.jpg" alt={t('services.maintenanceLarge')} width={64} height={64} className="rounded-lg" /></div>
                   <div>
-                    <h3 className="text-xl font-bold mb-1">Maintenance (დიდი)</h3>
-                    <p className="text-[var(--color-muted)] text-sm">დიდი პროექტების მხარდაჭერა</p>
+                    <h3 className="text-xl font-bold mb-1">{t('services.maintenanceLarge')}</h3>
+                    <p className="text-[var(--color-muted)] text-sm">{t('services.maintenanceLargeDesc')}</p>
                   </div>
                 </div>
-                <div className="text-3xl font-bold text-[var(--color-primary)]">შეთანხმებით</div>
+                <div className="text-3xl font-bold text-[var(--color-primary)]">{t('services.maintenanceLargePrice')}</div>
               </div>
             </div>
           </div>
@@ -307,16 +307,16 @@ export default function Home() {
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <div className="inline-block px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-bold mb-6 animate-pulse">
-            🔥 სპეციალური შეთავაზება
+            {t('specialOffer.badge')}
           </div>
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            500 მცირე მეწარმისთვის
+            {t('specialOffer.title')}
           </h2>
           <p className="text-2xl md:text-3xl mb-8 font-medium">
-            პროფესიონალური ლენდინგი მხოლოდ <span className="text-5xl font-bold">100₾-ად</span>
+            {t('specialOffer.price')} <span className="text-5xl font-bold">{t('specialOffer.priceAmount')}</span>
           </p>
           <p className="text-xl mb-8 text-white/90">
-            სრული მომსახურება: დიზაინი + დეველოპმენტი + ჰოსტინგი პირველი თვე უფასო
+            {t('specialOffer.description')}
           </p>
           <a 
             href="https://t.me/SiTechagencybot" 
@@ -325,10 +325,10 @@ export default function Home() {
             className="inline-flex items-center gap-2 px-10 py-5 bg-white text-[var(--color-primary)] rounded-full font-bold text-xl shadow-2xl hover:scale-105 transition-all"
           >
             <MessageCircle className="w-6 h-6" />
-            დაიჭირე ადგილი ახლავე
+            {t('specialOffer.cta')}
             <ArrowRight className="w-6 h-6" />
           </a>
-          <p className="text-sm mt-6 text-white/70">⏰ შეზღუდული რაოდენობა • დაჩქარდი!</p>
+          <p className="text-sm mt-6 text-white/70">{t('specialOffer.limited')}</p>
         </div>
       </section>
 
@@ -339,26 +339,26 @@ export default function Home() {
         
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <span className="text-[var(--color-secondary)] font-medium mb-4 block">მალე</span>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">რა <span className="text-gradient">გველოდება</span></h2>
-            <p className="text-[var(--color-muted)] text-lg max-w-2xl mx-auto">მალე დავამატებთ ახალ სერვისებს</p>
+            <span className="text-[var(--color-secondary)] font-medium mb-4 block">{t('comingSoon.badge')}</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">{t('comingSoon.title')} <span className="text-gradient">{t('comingSoon.titleGradient')}</span></h2>
+            <p className="text-[var(--color-muted)] text-lg max-w-2xl mx-auto">{t('comingSoon.subtitle')}</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: "icon-ai-chatbot.jpg", title: "AI ჩატბოტები", desc: "ინტელექტუალური ბოტები თქვენი ბიზნესისთვის" },
-              { icon: "icon-automation.jpg", title: "ბიზნეს ავტომატიზაცია", desc: "პროცესების ავტომატიზაცია და ოპტიმიზაცია" },
-              { icon: "icon-smm.jpg", title: "სოციალური ქსელების მართვა", desc: "SMM და კონტენტ მენეჯმენტი" },
-              { icon: "icon-training.jpg", title: "ტრენინგები/კურსები", desc: "ვებ ტექნოლოგიების სწავლება" },
+              { icon: "icon-ai-chatbot.jpg", titleKey: "comingSoon.aiChatbots", descKey: "comingSoon.aiChatbotsDesc" },
+              { icon: "icon-automation.jpg", titleKey: "comingSoon.automation", descKey: "comingSoon.automationDesc" },
+              { icon: "icon-smm.jpg", titleKey: "comingSoon.smm", descKey: "comingSoon.smmDesc" },
+              { icon: "icon-training.jpg", titleKey: "comingSoon.training", descKey: "comingSoon.trainingDesc" },
             ].map((service) => (
-              <div key={service.title} className="group relative p-6 rounded-2xl bg-[var(--color-background)] border border-dashed border-[var(--color-border)] opacity-75 hover:opacity-100 transition-all overflow-hidden">
+              <div key={service.titleKey} className="group relative p-6 rounded-2xl bg-[var(--color-background)] border border-dashed border-[var(--color-border)] opacity-75 hover:opacity-100 transition-all overflow-hidden">
                 <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity" style={{backgroundImage: "radial-gradient(circle, var(--color-secondary) 1px, transparent 1px)", backgroundSize: "24px 24px"}} />
                 <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[var(--color-secondary)]/5 to-transparent rounded-bl-full" />
                 <div className="relative z-10">
-                  <div className="mb-4"><Image src={`/icons/${service.icon}`} alt={service.title} width={64} height={64} className="rounded-lg" /></div>
-                  <h3 className="text-lg font-bold mb-2">{service.title}</h3>
-                  <p className="text-[var(--color-muted)] text-sm">{service.desc}</p>
-                  <div className="mt-4 inline-block px-3 py-1 bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] rounded-full text-xs font-medium">🔜 მალე</div>
+                  <div className="mb-4"><Image src={`/icons/${service.icon}`} alt={t(service.titleKey)} width={64} height={64} className="rounded-lg" /></div>
+                  <h3 className="text-lg font-bold mb-2">{t(service.titleKey)}</h3>
+                  <p className="text-[var(--color-muted)] text-sm">{t(service.descKey)}</p>
+                  <div className="mt-4 inline-block px-3 py-1 bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] rounded-full text-xs font-medium">{t('comingSoon.soon')}</div>
                 </div>
               </div>
             ))}
@@ -374,9 +374,9 @@ export default function Home() {
         
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <span className="text-[var(--color-accent)] font-medium mb-4 block">პორტფოლიო</span>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">ჩვენი <span className="text-gradient">ნამუშევრები</span></h2>
-            <p className="text-[var(--color-muted)] text-lg max-w-2xl mx-auto">რეალური პროექტები რეალური შედეგებით</p>
+            <span className="text-[var(--color-accent)] font-medium mb-4 block">{t('portfolio.badge')}</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">{t('portfolio.title')} <span className="text-gradient">{t('portfolio.titleGradient')}</span></h2>
+            <p className="text-[var(--color-muted)] text-lg max-w-2xl mx-auto">{t('portfolio.subtitle')}</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -389,7 +389,7 @@ export default function Home() {
             >
               <div className="relative">
                 <div className="absolute top-4 right-4 z-10 bg-[var(--color-primary)] text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-                  🔄 მიმდინარე
+                  {t('portfolio.ongoing')}
                 </div>
                 <div className="aspect-video bg-gradient-to-br from-green-600 to-emerald-700 flex items-center justify-center text-7xl">
                   📦
@@ -397,13 +397,13 @@ export default function Home() {
               </div>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xl font-bold group-hover:text-[var(--color-primary)] transition-colors">Greenland77.ge</h3>
+                  <h3 className="text-xl font-bold group-hover:text-[var(--color-primary)] transition-colors">{t('portfolio.greenlandTitle')}</h3>
                   <ExternalLink className="w-5 h-5 text-[var(--color-muted)] group-hover:text-[var(--color-primary)] transition-colors" />
                 </div>
-                <p className="text-[var(--color-muted)] text-sm mb-4">დისტრიბუციის პლატფორმა</p>
+                <p className="text-[var(--color-muted)] text-sm mb-4">{t('portfolio.greenlandDesc')}</p>
                 <div className="flex gap-2 flex-wrap">
                   <span className="px-2.5 py-1 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded-lg text-xs font-medium">Next.js</span>
-                  <span className="px-2.5 py-1 bg-green-500/10 text-green-500 rounded-lg text-xs font-medium">დისტრიბუცია</span>
+                  <span className="px-2.5 py-1 bg-green-500/10 text-green-500 rounded-lg text-xs font-medium">{t('portfolio.greenlandDesc')}</span>
                   <span className="px-2.5 py-1 bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded-lg text-xs font-medium">Supabase</span>
                 </div>
               </div>
@@ -418,7 +418,7 @@ export default function Home() {
             >
               <div className="relative">
                 <div className="absolute top-4 right-4 z-10 bg-[var(--color-accent)] text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1">
-                  🔄 მიმდინარე
+                  {t('portfolio.ongoing')}
                 </div>
                 <div className="aspect-video bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-7xl">
                   💼
@@ -426,10 +426,10 @@ export default function Home() {
               </div>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xl font-bold group-hover:text-[var(--color-accent)] transition-colors">WIG</h3>
+                  <h3 className="text-xl font-bold group-hover:text-[var(--color-accent)] transition-colors">{t('portfolio.wigTitle')}</h3>
                   <ExternalLink className="w-5 h-5 text-[var(--color-muted)] group-hover:text-[var(--color-accent)] transition-colors" />
                 </div>
-                <p className="text-[var(--color-muted)] text-sm mb-4">ბიზნეს ლენდინგი</p>
+                <p className="text-[var(--color-muted)] text-sm mb-4">{t('portfolio.wigDesc')}</p>
                 <div className="flex gap-2 flex-wrap">
                   <span className="px-2.5 py-1 bg-[var(--color-accent)]/10 text-[var(--color-accent)] rounded-lg text-xs font-medium">Landing</span>
                   <span className="px-2.5 py-1 bg-purple-500/10 text-purple-500 rounded-lg text-xs font-medium">ბიზნესი</span>
@@ -442,15 +442,15 @@ export default function Home() {
           <div className="mt-12 text-center">
             <div className="inline-block p-8 rounded-3xl bg-[var(--color-card)] border-2 border-dashed border-[var(--color-border)]">
               <div className="text-6xl mb-4">✨</div>
-              <h3 className="text-2xl font-bold mb-3">შენი პროექტი შემდეგია!</h3>
+              <h3 className="text-2xl font-bold mb-3">{t('portfolio.yourProject')}</h3>
               <p className="text-[var(--color-muted)] mb-6 max-w-md">
-                გაამდიდრე ჩვენი პორტფოლიო შენი უნიკალური პროექტით
+                {t('portfolio.yourProjectDesc')}
               </p>
               <button 
                 onClick={() => scrollTo("contact")}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-primary)] text-white rounded-full font-semibold hover:bg-[var(--color-primary-dark)] hover:scale-105 transition-all"
               >
-                დაიწყე პროექტი
+                {t('hero.startProject')}
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
@@ -466,9 +466,9 @@ export default function Home() {
         
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
-            <span className="text-[var(--color-accent)] font-medium mb-4 block">კონტაქტი</span>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">მოდი <span className="text-gradient">ვისაუბროთ</span></h2>
-            <p className="text-[var(--color-muted)] text-lg">მოგვიყევით შენი იდეის შესახებ — უფასო კონსულტაცია!</p>
+            <span className="text-[var(--color-accent)] font-medium mb-4 block">{t('contact.badge')}</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">{t('contact.title')} <span className="text-gradient">{t('contact.titleGradient')}</span></h2>
+            <p className="text-[var(--color-muted)] text-lg">{t('contact.subtitle')}</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -482,8 +482,8 @@ export default function Home() {
               <div className="w-16 h-16 rounded-2xl bg-[var(--color-primary)]/10 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 transition-transform">
                 💬
               </div>
-              <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--color-primary)] transition-colors">Telegram</h3>
-              <p className="text-[var(--color-muted)] text-center text-sm mb-4">დაუკავშირდი ლუსს ახლავე</p>
+              <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--color-primary)] transition-colors">{t('contact.telegram')}</h3>
+              <p className="text-[var(--color-muted)] text-center text-sm mb-4">{t('contact.telegramDesc')}</p>
               <p className="font-mono text-sm text-[var(--color-primary)]">@SiTechagencybot</p>
             </a>
 
@@ -495,8 +495,8 @@ export default function Home() {
               <div className="w-16 h-16 rounded-2xl bg-[var(--color-accent)]/10 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 transition-transform">
                 📧
               </div>
-              <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--color-accent)] transition-colors">Email</h3>
-              <p className="text-[var(--color-muted)] text-center text-sm mb-4">ოფიციალური წერილები</p>
+              <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--color-accent)] transition-colors">{t('contact.email')}</h3>
+              <p className="text-[var(--color-muted)] text-center text-sm mb-4">{t('contact.emailDesc')}</p>
               <p className="font-mono text-sm text-[var(--color-accent)]">hello@sitech.ge</p>
             </a>
 
@@ -505,9 +505,9 @@ export default function Home() {
               <div className="w-16 h-16 rounded-2xl bg-[var(--color-secondary)]/10 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 transition-transform">
                 📍
               </div>
-              <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--color-secondary)] transition-colors">ლოკაცია</h3>
-              <p className="text-[var(--color-muted)] text-center text-sm mb-4">სადაც ვართ</p>
-              <p className="font-medium text-[var(--color-secondary)]">ბათუმი, საქართველო</p>
+              <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--color-secondary)] transition-colors">{t('contact.location')}</h3>
+              <p className="text-[var(--color-muted)] text-center text-sm mb-4">{t('contact.locationDesc')}</p>
+              <p className="font-medium text-[var(--color-secondary)]">{t('contact.locationCity')}</p>
             </div>
           </div>
         </div>
@@ -580,7 +580,7 @@ export default function Home() {
             </div>
             {/* Tooltip */}
             <div className="absolute bottom-full right-0 mb-3 px-4 py-2 bg-[var(--color-card)] border border-[var(--color-border)] rounded-xl text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-xl">
-              💬 მომწერე ლუსის!
+              {t('lucyChat.writeToLucy')}
               <div className="absolute top-full right-6 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-[var(--color-card)]" />
             </div>
           </div>
@@ -596,7 +596,7 @@ export default function Home() {
             <>
               {/* Header */}
               <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white">
-                <h3 className="text-lg font-bold">💬 მომწერე ლუსის</h3>
+                <h3 className="text-lg font-bold">{t('lucyChat.header')}</h3>
                 <button
                   onClick={() => setIsPanelOpen(false)}
                   className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors"
@@ -629,38 +629,38 @@ export default function Home() {
                 className="p-4 space-y-4"
               >
                 <div>
-                  <label className="block text-sm font-medium mb-1">სახელი</label>
+                  <label className="block text-sm font-medium mb-1">{t('lucyChat.name')}</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-4 py-2 rounded-lg bg-[var(--color-background)] border border-[var(--color-border)] focus:border-[var(--color-primary)] focus:outline-none transition-colors"
-                    placeholder="შენი სახელი"
+                    placeholder={t('lucyChat.namePlaceholder')}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">ტელეფონი ან Email</label>
+                  <label className="block text-sm font-medium mb-1">{t('lucyChat.contact')}</label>
                   <input
                     type="text"
                     required
                     value={formData.contact}
                     onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
                     className="w-full px-4 py-2 rounded-lg bg-[var(--color-background)] border border-[var(--color-border)] focus:border-[var(--color-primary)] focus:outline-none transition-colors"
-                    placeholder="+995 XXX XX XX XX"
+                    placeholder={t('lucyChat.contactPlaceholder')}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">შეტყობინება</label>
+                  <label className="block text-sm font-medium mb-1">{t('lucyChat.message')}</label>
                   <textarea
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full px-4 py-2 rounded-lg bg-[var(--color-background)] border border-[var(--color-border)] focus:border-[var(--color-primary)] focus:outline-none transition-colors resize-none"
                     rows={4}
-                    placeholder="როგორ შემიძლია დაგეხმარო?"
+                    placeholder={t('lucyChat.messagePlaceholder')}
                   />
                 </div>
 
@@ -669,11 +669,11 @@ export default function Home() {
                   disabled={isSubmitting}
                   className="w-full py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] text-white font-semibold rounded-lg hover:opacity-90 disabled:opacity-50 transition-opacity"
                 >
-                  {isSubmitting ? "იგზავნება..." : "გაგზავნა"}
+                  {isSubmitting ? t('lucyChat.sending') : t('lucyChat.send')}
                 </button>
 
                 <p className="text-xs text-center text-[var(--color-muted)]">
-                  ან დაგვიკავშირდი:{" "}
+                  {t('lucyChat.orContact')}{" "}
                   <a
                     href="https://t.me/SiTechagencybot"
                     target="_blank"
@@ -695,8 +695,8 @@ export default function Home() {
           ) : (
             <div className="p-8 text-center">
               <div className="text-6xl mb-4">✅</div>
-              <h3 className="text-xl font-bold mb-2">მადლობა!</h3>
-              <p className="text-[var(--color-muted)]">ლუსი მალე დაგიკავშირდება!</p>
+              <h3 className="text-xl font-bold mb-2">{t('lucyChat.success')}</h3>
+              <p className="text-[var(--color-muted)]">{t('lucyChat.successMessage')}</p>
               <button
                 onClick={() => {
                   setIsSuccess(false);
@@ -704,7 +704,7 @@ export default function Home() {
                 }}
                 className="mt-6 px-6 py-2 bg-[var(--color-primary)] text-white rounded-full font-medium hover:opacity-90 transition-opacity"
               >
-                დახურვა
+                {t('lucyChat.close')}
               </button>
             </div>
           )}
