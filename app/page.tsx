@@ -611,7 +611,7 @@ export default function Home() {
                   e.preventDefault();
                   setIsSubmitting(true);
                   try {
-                    const response = await fetch("https://n8n.caucasusdancebridge.com/webhook/sitech-contact", {
+                    const response = await fetch("/api/contact", {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify(formData),
