@@ -14,6 +14,20 @@ function uuid() {
   return crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
 
+function getVisitorId(): string {
+  if (typeof window === "undefined") return uuid();
+  let id = localStorage.getItem("oc-visitor-id");
+  if (!id) {
+    id = uuid();
+    localStorage.setItem("oc-visitor-id", id);
+  }
+  return id;
+}
+
+function getSessionKey(): string {
+  return `agent:main:webchat:default:direct:visitor-${getVisitorId()}`;
+}
+
 export default function OpenClawChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -32,28 +46,19 @@ export default function OpenClawChat() {
   useEffect(() => { scrollToBottom(); }, [messages, isTyping, scrollToBottom]);
 
   const sendConnect = useCallback((ws: WebSocket) => {
+    // First frame must be raw connect params object (not JSON-RPC wrapper)
     ws.send(JSON.stringify({
-      type: "req",
-      id: uuid(),
-      method: "connect",
-      params: {
-        minProtocol: 3,
-        maxProtocol: 3,
-        client: {
-          id: "openclaw-control-ui",
-          version: "1.0.0",
-          platform: typeof navigator !== "undefined" ? navigator.platform : "web",
-          mode: "webchat",
-        },
-        role: "operator",
-        scopes: ["operator.read", "operator.write"],
-        caps: [],
-        commands: [],
-        permissions: {},
-        auth: GATEWAY_TOKEN ? { token: GATEWAY_TOKEN } : undefined,
-        locale: typeof navigator !== "undefined" ? navigator.language : "en",
-        userAgent: "sitech-webchat/1.0.0",
+      minProtocol: 3,
+      maxProtocol: 3,
+      client: {
+        id: "webchat",
+        version: "1.0.0",
+        platform: typeof navigator !== "undefined" ? navigator.platform : "web",
+        mode: "webchat",
       },
+      auth: GATEWAY_TOKEN ? { token: GATEWAY_TOKEN } : undefined,
+      locale: typeof navigator !== "undefined" ? navigator.language : "en",
+      userAgent: "sitech-webchat/1.0.0",
     }));
   }, []);
 
@@ -67,32 +72,18 @@ export default function OpenClawChat() {
       challengeHandled.current = false;
 
       ws.onopen = () => {
-        // Wait for connect.challenge or send connect immediately
-        // Some gateway versions send challenge first, others accept connect directly
-        setTimeout(() => {
-          if (!challengeHandled.current) {
-            sendConnect(ws);
-            challengeHandled.current = true;
-          }
-        }, 500);
+        // Send connect params immediately on open
+        sendConnect(ws);
       };
 
       ws.onmessage = (event) => {
         try {
           const data = JSON.parse(event.data);
 
-          // Handle connect.challenge
-          if (data.type === "event" && data.event === "connect.challenge") {
-            if (!challengeHandled.current) {
-              sendConnect(ws);
-              challengeHandled.current = true;
-            }
-            return;
-          }
-
-          // Handle hello-ok response
-          if (data.type === "res" && data.ok && data.payload?.type === "hello-ok") {
+          // Handle hello-ok (first response after connect)
+          if (data.type === "hello-ok") {
             setIsConnected(true);
+            console.log("OpenClaw connected, protocol:", data.protocol);
             return;
           }
 
@@ -102,22 +93,39 @@ export default function OpenClawChat() {
             return;
           }
 
-          // Handle chat events (streaming)
-          if (data.type === "event" && data.event === "chat") {
-            const state = data.payload?.state;
-            const text = data.payload?.text || data.payload?.message?.content || "";
+          // Handle chat.send response (ack)
+          if (data.type === "res" && data.ok) {
+            return;
+          }
 
-            if (state === "delta" && text) {
-              setIsTyping(true);
-              setMessages((prev) => {
-                const last = prev[prev.length - 1];
-                if (last?.role === "assistant" && Date.now() - last.timestamp < 120000) {
-                  return [...prev.slice(0, -1), { ...last, content: last.content + text }];
-                }
-                return [...prev, { role: "assistant", content: text, timestamp: Date.now() }];
-              });
-            } else if (state === "final") {
+          // Handle events (streaming chat, etc.)
+          if (data.type === "event") {
+            const ev = data.event;
+
+            // Agent text streaming
+            if (ev === "agent.text.delta") {
+              const text = data.payload?.text || "";
+              if (text) {
+                setIsTyping(true);
+                setMessages((prev) => {
+                  const last = prev[prev.length - 1];
+                  if (last?.role === "assistant" && Date.now() - last.timestamp < 120000) {
+                    return [...prev.slice(0, -1), { ...last, content: last.content + text }];
+                  }
+                  return [...prev, { role: "assistant", content: text, timestamp: Date.now() }];
+                });
+              }
+              return;
+            }
+
+            if (ev === "agent.turn.end" || ev === "agent.run.end") {
               setIsTyping(false);
+              return;
+            }
+
+            if (ev === "agent.text.done") {
+              setIsTyping(false);
+              const text = data.payload?.text || "";
               if (text) {
                 setMessages((prev) => {
                   const last = prev[prev.length - 1];
@@ -127,15 +135,21 @@ export default function OpenClawChat() {
                   return [...prev, { role: "assistant", content: text, timestamp: Date.now() }];
                 });
               }
-            } else if (state === "error") {
-              setIsTyping(false);
+              return;
             }
-            return;
-          }
 
-          // Handle chat.history response
-          if (data.type === "res" && data.ok && Array.isArray(data.payload)) {
-            // History messages
+            // Generic chat event fallback
+            if (ev === "chat" || ev === "chat.message") {
+              const text = data.payload?.text || data.payload?.message?.content || data.payload?.content || "";
+              if (text) {
+                setIsTyping(false);
+                setMessages((prev) => [...prev, { role: "assistant", content: text, timestamp: Date.now() }]);
+              }
+              return;
+            }
+
+            // Log unknown events for debugging
+            console.log("OpenClaw event:", ev, data.payload);
             return;
           }
 
@@ -195,7 +209,11 @@ export default function OpenClawChat() {
       type: "req",
       id: uuid(),
       method: "chat.send",
-      params: { text },
+      params: {
+        sessionKey: getSessionKey(),
+        message: text,
+        idempotencyKey: uuid(),
+      },
     }));
   };
 
