@@ -43,11 +43,15 @@ async function chatWithLucy(message: string, sessionId: string): Promise<string>
             id: 'connect-1',
             method: 'connect',
             params: {
+              minProtocol: 1,
+              maxProtocol: 1,
+              client: { name: 'sitech-webchat', version: '1.0.0' },
               auth: { token: GW_TOKEN },
               device: {
+                id: `webchat-${sessionId}`,
+                name: 'SiTech WebChat',
                 platform: 'web',
                 mode: 'webchat',
-                instanceId: `webchat-${sessionId}`,
               },
               role: 'owner',
               scopes: [],
