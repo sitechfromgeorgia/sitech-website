@@ -6,6 +6,7 @@ import { LanguageProvider } from "@/lib/language-context";
 import Navbar from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { PWARegister } from "@/components/pwa-register";
+import ChatWidget from "@/components/chat-widget";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -77,6 +78,7 @@ export default function RootLayout({
               <main className="flex-1">{children}</main>
               <Footer />
               <PWARegister />
+              <ChatWidget />
             </div>
           </LanguageProvider>
         </ThemeProvider>
