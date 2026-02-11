@@ -46,19 +46,24 @@ export default function OpenClawChat() {
   useEffect(() => { scrollToBottom(); }, [messages, isTyping, scrollToBottom]);
 
   const sendConnect = useCallback((ws: WebSocket) => {
-    // First frame must be raw connect params object (not JSON-RPC wrapper)
+    // First frame MUST be JSON-RPC request: { type:"req", id, method:"connect", params:{...} }
     ws.send(JSON.stringify({
-      minProtocol: 3,
-      maxProtocol: 3,
-      client: {
-        id: "webchat",
-        version: "1.0.0",
-        platform: typeof navigator !== "undefined" ? navigator.platform : "web",
-        mode: "webchat",
+      type: "req",
+      id: uuid(),
+      method: "connect",
+      params: {
+        minProtocol: 3,
+        maxProtocol: 3,
+        client: {
+          id: "webchat",
+          version: "1.0.0",
+          platform: typeof navigator !== "undefined" ? navigator.platform : "web",
+          mode: "webchat",
+        },
+        auth: GATEWAY_TOKEN ? { token: GATEWAY_TOKEN } : undefined,
+        locale: typeof navigator !== "undefined" ? navigator.language : "en",
+        userAgent: "sitech-webchat/1.0.0",
       },
-      auth: GATEWAY_TOKEN ? { token: GATEWAY_TOKEN } : undefined,
-      locale: typeof navigator !== "undefined" ? navigator.language : "en",
-      userAgent: "sitech-webchat/1.0.0",
     }));
   }, []);
 
