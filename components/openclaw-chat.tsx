@@ -8,6 +8,12 @@ interface Message {
   timestamp: number;
 }
 
+interface ContactInfo {
+  firstName: string;
+  lastName: string;
+  message: string;
+}
+
 const GATEWAY_TOKEN = process.env.NEXT_PUBLIC_OPENCLAW_TOKEN || "";
 
 function uuid() {
@@ -34,10 +40,12 @@ export default function OpenClawChat() {
   const [isOpen, setIsOpen] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [contact, setContact] = useState<ContactInfo>({ firstName: "", lastName: "", message: "" });
+  const [formSending, setFormSending] = useState(false);
   const wsRef = useRef<WebSocket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const reconnectTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const challengeHandled = useRef(false);
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -46,7 +54,6 @@ export default function OpenClawChat() {
   useEffect(() => { scrollToBottom(); }, [messages, isTyping, scrollToBottom]);
 
   const sendConnect = useCallback((ws: WebSocket) => {
-    // First frame MUST be JSON-RPC request: { type:"req", id, method:"connect", params:{...} }
     ws.send(JSON.stringify({
       type: "req",
       id: uuid(),
@@ -74,40 +81,28 @@ export default function OpenClawChat() {
     try {
       const wsUrl = `${window.location.protocol === "https:" ? "wss:" : "ws:"}//${window.location.host}/openclaw-ws`;
       const ws = new WebSocket(wsUrl);
-      challengeHandled.current = false;
 
-      ws.onopen = () => {
-        // Send connect params immediately on open
-        sendConnect(ws);
-      };
+      ws.onopen = () => sendConnect(ws);
 
       ws.onmessage = (event) => {
         try {
           const data = JSON.parse(event.data);
 
-          // Handle hello-ok (first response after connect)
           if (data.type === "hello-ok") {
             setIsConnected(true);
-            console.log("OpenClaw connected, protocol:", data.protocol);
             return;
           }
 
-          // Handle res errors
           if (data.type === "res" && !data.ok) {
             console.warn("OpenClaw error:", data.error);
             return;
           }
 
-          // Handle chat.send response (ack)
-          if (data.type === "res" && data.ok) {
-            return;
-          }
+          if (data.type === "res" && data.ok) return;
 
-          // Handle events (streaming chat, etc.)
           if (data.type === "event") {
             const ev = data.event;
 
-            // Agent text streaming
             if (ev === "agent.text.delta") {
               const text = data.payload?.text || "";
               if (text) {
@@ -143,7 +138,6 @@ export default function OpenClawChat() {
               return;
             }
 
-            // Generic chat event fallback
             if (ev === "chat" || ev === "chat.message") {
               const text = data.payload?.text || data.payload?.message?.content || data.payload?.content || "";
               if (text) {
@@ -152,15 +146,8 @@ export default function OpenClawChat() {
               }
               return;
             }
-
-            // Log unknown events for debugging
-            console.log("OpenClaw event:", ev, data.payload);
-            return;
           }
-
-        } catch {
-          // ignore
-        }
+        } catch { /* ignore */ }
       };
 
       ws.onerror = () => setIsConnected(false);
@@ -180,20 +167,11 @@ export default function OpenClawChat() {
   }, [isOpen, sendConnect]);
 
   useEffect(() => {
-    if (isOpen) {
-      connect();
-      if (messages.length === 0) {
-        setMessages([{
-          role: "assistant",
-          content: "გამარჯობა! 👋 მე ვარ ლუსი, SiTech-ის AI ასისტენტი. რით შემიძლია დაგეხმაროთ?",
-          timestamp: Date.now(),
-        }]);
-      }
-    }
+    if (isOpen && formSubmitted) connect();
     return () => {
       if (reconnectTimer.current) clearTimeout(reconnectTimer.current);
     };
-  }, [isOpen, connect]);
+  }, [isOpen, formSubmitted, connect]);
 
   useEffect(() => {
     return () => {
@@ -201,6 +179,38 @@ export default function OpenClawChat() {
       if (reconnectTimer.current) clearTimeout(reconnectTimer.current);
     };
   }, []);
+
+  const handleFormSubmit = () => {
+    if (!contact.firstName.trim() || !contact.lastName.trim() || !contact.message.trim()) return;
+    setFormSending(true);
+    setFormSubmitted(true);
+
+    // Show user's initial message in chat
+    setMessages([{
+      role: "user",
+      content: contact.message.trim(),
+      timestamp: Date.now(),
+    }]);
+    setIsTyping(true);
+  };
+
+  // Once connected after form submit, send the intro message to Lucy
+  useEffect(() => {
+    if (isConnected && formSubmitted && formSending && wsRef.current) {
+      const introText = `[ახალი ვიზიტორი sitech.ge-დან]\nსახელი: ${contact.firstName} ${contact.lastName}\n\nშეტყობინება: ${contact.message}`;
+      wsRef.current.send(JSON.stringify({
+        type: "req",
+        id: uuid(),
+        method: "chat.send",
+        params: {
+          sessionKey: getSessionKey(),
+          message: introText,
+          idempotencyKey: uuid(),
+        },
+      }));
+      setFormSending(false);
+    }
+  }, [isConnected, formSubmitted, formSending, contact]);
 
   const sendMessage = () => {
     const text = input.trim();
@@ -222,11 +232,16 @@ export default function OpenClawChat() {
     }));
   };
 
+  // ── Accent color ──
+  const accent = "#c8f542";
+
   return (
     <>
+      {/* FAB Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-purple-700 text-white shadow-lg shadow-purple-500/30 transition-all hover:scale-105 hover:shadow-purple-500/50 active:scale-95"
+        className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full text-black shadow-lg transition-all hover:scale-105 active:scale-95"
+        style={{ backgroundColor: accent, boxShadow: `0 4px 20px ${accent}40` }}
         aria-label={isOpen ? "ჩატის დახურვა" : "ჩატის გახსნა"}
       >
         {isOpen ? (
@@ -240,67 +255,136 @@ export default function OpenClawChat() {
         )}
       </button>
 
+      {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-5 z-50 flex h-[28rem] w-[22rem] flex-col overflow-hidden rounded-2xl border border-white/10 bg-gray-900/95 shadow-2xl shadow-black/40 backdrop-blur-xl sm:h-[32rem] sm:w-96">
-          <div className="flex items-center gap-3 border-b border-white/10 bg-gradient-to-r from-violet-600/20 to-purple-600/20 px-4 py-3">
+        <div className="fixed bottom-24 right-5 z-50 flex h-[28rem] w-[22rem] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0c0c0c]/95 shadow-2xl shadow-black/40 backdrop-blur-xl sm:h-[32rem] sm:w-96">
+          {/* Header */}
+          <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3" style={{ background: `linear-gradient(135deg, ${accent}15, ${accent}08)` }}>
             <div className="relative">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-violet-600 text-lg">✨</div>
-              <div className={`absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-gray-900 ${isConnected ? "bg-green-500" : "bg-red-500"}`} />
+              <div className="flex h-9 w-9 items-center justify-center rounded-full text-lg" style={{ backgroundColor: `${accent}30` }}>✨</div>
+              {formSubmitted && (
+                <div className={`absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[#0c0c0c] ${isConnected ? "bg-green-500" : "bg-yellow-500 animate-pulse"}`} />
+              )}
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-white">ლუსი</h3>
-              <p className="text-xs text-gray-400">{isConnected ? "ონლაინ" : "კავშირი..."}</p>
+              <h3 className="text-sm font-semibold text-white">SiTech</h3>
+              <p className="text-xs text-gray-400">
+                {!formSubmitted ? "დაგვიკავშირდით" : isConnected ? "ონლაინ" : "კავშირი..."}
+              </p>
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
-            {messages.map((msg, idx) => (
-              <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                <div className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
-                  msg.role === "user"
-                    ? "rounded-br-md bg-violet-600 text-white"
-                    : "rounded-bl-md bg-white/10 text-gray-100"
-                }`}>
-                  {msg.content}
-                </div>
-              </div>
-            ))}
-            {isTyping && (
-              <div className="flex justify-start">
-                <div className="rounded-2xl rounded-bl-md bg-white/10 px-4 py-3">
-                  <div className="flex gap-1">
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:0ms]" />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:150ms]" />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:300ms]" />
-                  </div>
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
+          {/* Content */}
+          {!formSubmitted ? (
+            /* ── Contact Form ── */
+            <div className="flex flex-1 flex-col gap-4 p-5">
+              <p className="text-sm text-gray-300">
+                გამარჯობა! 👋 შეავსეთ ფორმა და ჩვენი გუნდი მალევე დაგიკავშირდებათ.
+              </p>
 
-          <div className="border-t border-white/10 bg-gray-900/80 p-3">
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
-                placeholder="დაწერეთ შეტყობინება..."
-                disabled={!isConnected}
-                className="flex-1 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition-colors focus:border-violet-500/50 disabled:opacity-40"
-              />
+              <div className="flex gap-2">
+                <div className="flex-1">
+                  <label className="mb-1 block text-xs text-gray-500">სახელი *</label>
+                  <input
+                    type="text"
+                    value={contact.firstName}
+                    onChange={(e) => setContact({ ...contact, firstName: e.target.value })}
+                    placeholder="თქვენი სახელი"
+                    className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white placeholder-gray-600 outline-none transition-colors focus:border-[#c8f542]/50"
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="mb-1 block text-xs text-gray-500">გვარი *</label>
+                  <input
+                    type="text"
+                    value={contact.lastName}
+                    onChange={(e) => setContact({ ...contact, lastName: e.target.value })}
+                    placeholder="თქვენი გვარი"
+                    className="w-full rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white placeholder-gray-600 outline-none transition-colors focus:border-[#c8f542]/50"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-1 block text-xs text-gray-500">შეტყობინება *</label>
+                <textarea
+                  value={contact.message}
+                  onChange={(e) => setContact({ ...contact, message: e.target.value })}
+                  placeholder="რით შეგვიძლია დაგეხმაროთ?"
+                  rows={4}
+                  className="w-full resize-none rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-white placeholder-gray-600 outline-none transition-colors focus:border-[#c8f542]/50"
+                />
+              </div>
+
               <button
-                onClick={sendMessage}
-                disabled={!isConnected || !input.trim()}
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-600 text-white transition-all hover:bg-violet-500 disabled:opacity-40"
+                onClick={handleFormSubmit}
+                disabled={!contact.firstName.trim() || !contact.lastName.trim() || !contact.message.trim()}
+                className="mt-auto rounded-lg py-2.5 text-sm font-semibold text-black transition-all hover:brightness-110 disabled:opacity-30 disabled:cursor-not-allowed"
+                style={{ backgroundColor: accent }}
               >
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                </svg>
+                გაგზავნა →
               </button>
+
+              <p className="text-center text-[10px] text-gray-600">
+                ჩვენ ვიყენებთ AI ასისტენტს სწრაფი პასუხისთვის
+              </p>
             </div>
-          </div>
+          ) : (
+            /* ── Chat View ── */
+            <>
+              <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
+                {messages.map((msg, idx) => (
+                  <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                    <div className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
+                      msg.role === "user"
+                        ? "rounded-br-md text-black"
+                        : "rounded-bl-md bg-white/10 text-gray-100"
+                    }`}
+                    style={msg.role === "user" ? { backgroundColor: accent } : undefined}
+                    >
+                      {msg.content}
+                    </div>
+                  </div>
+                ))}
+                {isTyping && (
+                  <div className="flex justify-start">
+                    <div className="rounded-2xl rounded-bl-md bg-white/10 px-4 py-3">
+                      <div className="flex gap-1">
+                        <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:0ms]" />
+                        <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:150ms]" />
+                        <span className="h-2 w-2 animate-bounce rounded-full bg-gray-400 [animation-delay:300ms]" />
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <div ref={messagesEndRef} />
+              </div>
+
+              <div className="border-t border-white/10 bg-[#0c0c0c]/80 p-3">
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
+                    placeholder="დაწერეთ შეტყობინება..."
+                    disabled={!isConnected}
+                    className="flex-1 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition-colors focus:border-[#c8f542]/50 disabled:opacity-40"
+                  />
+                  <button
+                    onClick={sendMessage}
+                    disabled={!isConnected || !input.trim()}
+                    className="flex h-10 w-10 items-center justify-center rounded-xl text-black transition-all hover:brightness-110 disabled:opacity-40"
+                    style={{ backgroundColor: accent }}
+                  >
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       )}
     </>
